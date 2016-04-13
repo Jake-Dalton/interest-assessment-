@@ -1,0 +1,11 @@
+form {
+	margin-top: 26px;
+}
+
+form input, form button {
+	margin-top: 10px;
+}
+
+.panel.panel-default {
+	margin-top: 20px;
+}

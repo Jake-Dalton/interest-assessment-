@@ -4,23 +4,38 @@
 <!-- Optional theme -->
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap-theme.min.css" integrity="sha384-fLW2N01lMqjakBkx3l/M9EahuwpSfeNvV63J5ezn3uZzapT0u7EYsXMjQV+0En5r" crossorigin="anonymous">
 
+<!-- user edit css -->
+<link rel="stylesheet" type="text/css" href="css/userEdit.css">
+
 <!-- Latest compiled and minified JavaScript -->
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
 <div class="container">
-<h3>Select your quiz!</h3>
+<h3>User Settings</h3>
+<a href="superAdmin.html"><button type="button" class="btn btn-success">Go Back</button></a>
+<a href="editUser.html"><button type="button" class="btn btn-success">Add New User</button></a>
+
+<div class="row">
+<div class="col-lg-6">
 <div class="panel panel-default">
   <div class="panel-body">
-<form>
-<input type="radio" name="quizSelect" checked>General</input><br>
-<input type="radio" name="quizSelect">Networking</input><br>
-<input type="radio" name="quizSelect">Information Technology</input><br>
-<input type="radio" name="quizSelect">Software Development</input><br>
+   		<form class="text-center">	
+		Name: <input type="text"></input><br>
+		Email: <input type="text"></input><br>
+		Phone: <input type="text"></input><br>
+		Password: <input type="text"></input><br>
+		<button type="button" class="btn btn-success">Submit</button>
+		</form>
+  </div>
+</div>
 
-<input type="text" name="studentEmail" value="email" autofocus=""><br>
 
 
-<a href="preQuiz.html"><button type="button" class="btn btn-success">Go!</button></a>
-</form>
+
+
 </div>
 </div>
+
+
 </div>
+
+
