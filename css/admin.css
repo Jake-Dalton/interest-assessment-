@@ -15,12 +15,14 @@ Drk. Beige:		#D8D9AD
 
 .jumbotron {
 	background: #D8D9AD;
-	padding: 0px; 
+	padding: 0px;
+	width: 100%;
+	height: auto; 
 }
 
 .jumbotron img {
     padding-top: 30px;
-}
+	}
 
 .btn.btn-default:hover {
 	background: #780000;
