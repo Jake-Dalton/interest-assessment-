@@ -1,3 +1,4 @@
+@charset "utf-8";
 /*********Color Palette*********
 Maroon:   		#780000
 Yellow: 		#EEB111
@@ -38,11 +39,19 @@ form input  {
 .jumbotron {
 	background: #D8D9AD;
 	padding: 0 50 10 0;
-	width: 1000px; 
+	width: 100%;
+	height: auto; 
 }
 
 .jumbotron img {
     padding-top: 30px;
+}
+
+.panel-body {
+	
+margin:0 5 0 10%;
+
+
 }
 
 .panel-body label {
@@ -55,4 +64,6 @@ form input  {
 }
 .panel.panel-default {
 	margin-top: 20px;
+	width: 100%;
+	height: auto;
 }
