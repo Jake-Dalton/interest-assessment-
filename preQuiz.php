@@ -17,16 +17,15 @@
 <body>
 	
 <div class="container">
-      <div class="jumbotron">
-      <img id="logo" src="images/Logo.png" />
-         
-     	</div>
+   <div class="jumbotron">
+     <img id="logo" src="images/Logo.png" />
+    </div>
 
-<div class="panel panel-default text-center">
-<div class="panel-heading" class="row text-center">
+	<div class="panel panel-default text-center">
+	<div class="panel-heading" class="row text-center">
 
- <div >
-    		  </div>
+      <div >
+   </div>
 </div>
 <div class="panel-body">
 <h2 class="text-center">This is NOT a test!</h2>
