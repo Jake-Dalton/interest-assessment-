@@ -24,7 +24,7 @@
                 <h3>Super Admin Panel</h3>
                 <div class="row text-right">
                     <div class="col-lg-12">
-                        <p>Admin Name Here</p><span><a href="login.html"><button type="button" class="btn btn-default">Log Out</button></a></span>
+                        <p>Admin Name Here</p><span><a href="login.php"><button type="button" class="btn btn-default">Log Out</button></a></span>
                     </div>
                 </div>
             </div>
@@ -46,7 +46,7 @@
                     <td>Data</td>
                     <td>Data</td>
                     <td>
-                        <a href="userEdit.html"><button type="button" class="btn btn-default">Edit</button></a>
+                        <a href="userEdit.php"><button type="button" class="btn btn-default">Edit</button></a>
                         <button type="button" class="btn btn-default">Delete</button>
                     </td>
                 </tr>
@@ -169,7 +169,7 @@
 
             <div class="row" id="yourQuiz">
                 <div class="col-lg-12">
-                    <a href="admin.html"><button type="button" class="btn btn-default">Go to Admin Panel</button></a>
+                    <a href="admin.php"><button type="button" class="btn btn-default">Go to Admin Panel</button></a>
 
                 </div>
             </div><!--Your Quiz Row -->
