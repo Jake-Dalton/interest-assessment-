@@ -22,7 +22,7 @@
     <div class="col-lg-12">
       <p>Admin Name Here</p><span><a href="login.html"><button type="button" class="btn btn-default">Log Out</button></a></span></p>
     </div>
-    </div>
+    </div>    
 </div>
 
 
