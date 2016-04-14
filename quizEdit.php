@@ -20,14 +20,14 @@
     <h3>Edit your quiz</h3>
     <div class="row text-right">
     <div class="col-lg-12">
-      <p>Admin Name Here</p><span><a href="login.html"><button type="button" class="btn btn-default">Log Out</button></a></span></p>
+      <p>Admin Name Here</p><span><a href="login.php"><button type="button" class="btn btn-default">Log Out</button></a></span></p>
     </div>
     </div>    
 </div>
 
 
 <a href="admin.html"><button type="button" class="btn btn-default">Go Back</button></a>
-<a href="addQuestion.html"><button type="button" class="btn btn-default">Add Question</button></a>
+<a href="addQuestion.php"><button type="button" class="btn btn-default">Add Question</button></a>
 
 
 <div class="container">
