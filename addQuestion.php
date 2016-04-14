@@ -27,7 +27,7 @@
             </div>
         </div>
 
-        <a href="superAdmin.html"><button type="button" class="btn btn-default">Go Back</button></a>
+        <a href="superAdmin.php"><button type="button" class="btn btn-default">Go Back</button></a>
 
         <div class="row">
             <div class="col-lg-12">
