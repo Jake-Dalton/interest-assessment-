@@ -22,9 +22,7 @@
                     $sql = "SELECT quizName, 
                                    quizID
                             FROM quizzes";
-
                     $result = mysqli_query($conn, $sql);
-
                     if (mysqli_num_rows($result) > 0) {
                         while($row = mysqli_fetch_assoc($result)) {
                             echo "<input type='radio' name='quizSelect' value='" . $row[quizID] . "'>" . $row[quizName] . "</input><br>";
@@ -34,7 +32,10 @@
                     }
                 ?>
 
-                <input type="text" name="studentEmail" value="email" autofocus=""><br>
+                <input type="text" name="studentEmail" value="email" required autofocus=""><br>
+                <input type="text" name="studentFName" value="first name"><br>
+                 <input type="text" name="studentLName" value="last name"><br>
+                <input type="text" name="studentEmail" value="studentID"><br>
 
                 <a href="preQuiz.html"><button type="button" class="btn btn-success">Go!</button></a>
                 </form>
