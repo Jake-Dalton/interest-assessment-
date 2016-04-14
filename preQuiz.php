@@ -30,7 +30,7 @@
 <div class="panel-body">
 <h2 class="text-center">This is NOT a test!</h2>
 <p>This is not a test determining whether you get into the program or not. This is simply a mannar of helping us determine where your current skills are placed, to help us better understand your current skill level.  Click below to begin the quiz!</p>
-<a href="quiz.html"><button type="button" class="btn btn-default">Begin Quiz</button></a>
+<a href="quiz.php"><button type="button" class="btn btn-default">Begin Quiz</button></a>
 </div>
 </div>
 </div>
