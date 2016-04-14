@@ -63,7 +63,7 @@
                         YOUR QUIZ NAME & SOME DETAILS?
                     </div>
                 </div>
-                <a href="quizEdit.html"><button type="button" class="btn btn-default">Edit Quiz</button></a>
+                <a href="quizEdit.php"><button type="button" class="btn btn-default">Edit Quiz</button></a>
             </div>
         </div><!--Your Quiz Row -->
     </div> <!-- container -->
