@@ -28,16 +28,64 @@
             </div>
 
             <?php
-            $selectedAnswer1 = htmlspecialchars($_POST['answer1']);
-            $selectedAnswer2 = htmlspecialchars($_POST['answer2']);
-            $selectedAnswer3 = htmlspecialchars($_POST['answer3']);
-            $selectedAnswer4 = htmlspecialchars($_POST['answer4']);
-            $selectedAnswer5 = htmlspecialchars($_POST['answer5']);
+            $i = 1;
+            $selectedQuizID = intval($_POST['selectedQuizID']);
+            $numOfQuestions = intval($_POST['numOfQuestions']);
+            $numCorrect = 0;
+            $percentCorrect = 0;
+
+            // Set up selectedAnswer variables for however many questions there are.
+            while ($i <= $numOfQuestions) {
+                ${selectedAnswer . $i} = intval($_POST['answer' . $i]);
+                $i++;
+            }
+
             $email = htmlspecialchars($_POST['studentEmail']);
             $fName = htmlspecialchars($_POST['studentFName']);
             $lName = htmlspecialchars($_POST['studentLName']);
-            $studentId = htmlspecialchars($_POST['studentId']);
-            echo $selectedAnswer1 . "<br>" .  $selectedAnswer2  . "<br>". $selectedAnswer3  . "<br>". $selectedAnswer4  . "<br>". $selectedAnswer5  . "<br>". $email  . "<br>". $fName  . "<br>". $lName  . "<br>". $studentId;
+            $studentId = intval($_POST['studentId']);
+
+            // echo testing
+            echo "Quiz ID: " . $selectedQuizID . "<br>" . 
+                "Number of Questions: " . $numOfQuestions . "<br>" . 
+                "Selected Answer 1: " . $selectedAnswer1 . "<br>" .  
+                "Selected Answer 2: " . $selectedAnswer2  . "<br>" . 
+                "Selected Answer 3: " . $selectedAnswer3  . "<br>" . 
+                "Selected Answer 4: " . $selectedAnswer4  . "<br>" . 
+                "Selected Answer 5: " . $selectedAnswer5  . "<br>" . 
+                "Email: " . $email  . "<br>" . 
+                "First Name: " . $fName  . "<br>". 
+                "Last Name: " . $lName  . "<br>". 
+                "Student ID: " . $studentId . "<br>";
+
+            // end echo testing
+
+            // Find out if selected answers are correct
+            $i = 1;
+            while ($i <= $numOfQuestions) {
+
+                $sql = "SELECT * 
+                    FROM answers
+                    WHERE isCorrect = 1 
+                    AND answerID = " . ${selectedAnswer . $i};
+
+                $result = mysqli_query($conn, $sql);
+
+                if (mysqli_num_rows($result) > 0) {
+                    while($row = mysqli_fetch_assoc($result)) {
+                        $numCorrect++;
+                    }
+                } else {
+                }
+                $i++;
+            }
+
+            echo "<br> Number Correct: " . $numCorrect;
+
+            $percentCorrect = $numCorrect / $numOfQuestions;
+
+            echo "<br> Precent Correct: " . $percentCorrect * 100 . "%";
+
             ?>
 
             <div class="row">
@@ -72,17 +120,19 @@
                 </div>
             </div>
 
-            <div class="panel panel-default">
-                <div class="panel-heading text-center">
-                    <h3 class="panel-title">Your Test</h3>
-                </div>
-                <div class="panel-body">
-                    <h4>Question 1</h4>
-                    <p>What is blah blah of the bloborian root of blah?   <span class="glyphicon glyphicon-ok"> </span></p>
-                    <h4>Question 2</h4>
-                    <p>What is blah blah of the bloborian root of blah?   <span class="glyphicon glyphicon-remove"> </span></p>
-                </div>
-            </div>
+            <!--
+<div class="panel panel-default">
+<div class="panel-heading text-center">
+<h3 class="panel-title">Your Test</h3>
+</div>
+<div class="panel-body">
+<h4>Question 1</h4>
+<p>What is blah blah of the bloborian root of blah?   <span class="glyphicon glyphicon-ok"> </span></p>
+<h4>Question 2</h4>
+<p>What is blah blah of the bloborian root of blah?   <span class="glyphicon glyphicon-remove"> </span></p>
+</div>
+</div>
+-->
         </div> <!-- closes container -->
     </body>
 </html>
