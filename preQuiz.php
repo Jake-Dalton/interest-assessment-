@@ -1,7 +1,7 @@
 <!doctype html>
 <html lang="en">
 <head>
-<?php require 'connection.php'?>
+<?php require 'connection.php';?>
 <meta charset="utf-8" />
 <title>Interest Assessment Pre-Quiz</title>
 <!-- Latest compiled and minified CSS -->
@@ -30,7 +30,23 @@
 <div class="panel-body">
 <h2 class="text-center">This is NOT a test!</h2>
 <p>This is not a test determining whether you get into the program or not. This is simply a mannar of helping us determine where your current skills are placed, to help us better understand your current skill level.  Click below to begin the quiz!</p>
-<a href="quiz.php"><button type="button" class="btn btn-default">Begin Quiz</button></a>
+
+<form action="quiz.php" method="post">
+<?php
+                    $sql = "SELECT quizName, 
+                                   quizID
+                            FROM quizzes";
+                    $result = mysqli_query($conn, $sql);
+                    if (mysqli_num_rows($result) > 0) {
+                        while($row = mysqli_fetch_assoc($result)) {
+                            echo "<input type='radio' name='quizSelect' value='" . $row[quizID] . "'>" . $row[quizName] . "</input><br>";
+                        }
+                    }else {
+                        echo "No results found.";
+                    }
+                ?>
+                  <input type="submit" value="Submit">
+</form>
 </div>
 </div>
 </div>

@@ -1,7 +1,7 @@
 <!doctype html>
 <html lang="en">
 <head>
-php require 'connection.php'?>
+<php require 'connection.php';?>
 <meta charset="utf-8" />
 <title>Interest Assessment Results</title>
 <!-- Latest compiled and minified CSS -->
@@ -23,6 +23,19 @@ php require 'connection.php'?>
    </div>
 </div>
 </div>
+
+ <?php
+                $selectedAnswer1 = htmlspecialchars($_POST['answer1']);
+                 $selectedAnswer2 = htmlspecialchars($_POST['answer2']);
+                 $selectedAnswer3 = htmlspecialchars($_POST['answer3']);
+                 $selectedAnswer4 = htmlspecialchars($_POST['answer4']);
+                 $selectedAnswer5 = htmlspecialchars($_POST['answer5']);
+                 $email = htmlspecialchars($_POST['studentEmail']);
+                 $fName = htmlspecialchars($_POST['studentFName']);
+                 $lName = htmlspecialchars($_POST['studentLName']);
+                $studentId = htmlspecialchars($_POST['studentId']);
+                 echo $selectedAnswer1 . "<br>" .  $selectedAnswer2  . "<br>". $selectedAnswer3  . "<br>". $selectedAnswer4  . "<br>". $selectedAnswer5  . "<br>". $email  . "<br>". $fName  . "<br>". $lName  . "<br>". $studentId;
+    ?>
     
     <div class="row">
         <div class="col-lg-6">

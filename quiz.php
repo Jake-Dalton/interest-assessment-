@@ -15,11 +15,14 @@
     
     <body>
         <div class="container">
-            
+
+
             <?php
+                $selectedQuizId = htmlspecialchars($_POST['quizSelect']);
+
                 $sql = "SELECT quizName
                         FROM quizzes
-                        WHERE quizID = 2";
+                        WHERE quizID = " . $selectedQuizId;
                 $result = mysqli_query($conn, $sql);
                 
                 if (mysqli_num_rows($result) > 0) {
@@ -31,30 +34,30 @@
                 }
             ?>
             
+            
+
             <div class="panel panel-default">
                 <div class="panel-body">
-                    <form>
+                    <form action="results.php" method="post">
                         <?php
                             $i = 1;
                             $sql = "SELECT questionContent, questionID
                                     FROM questions
-                                    WHERE quizID = 2";
+                                    WHERE quizID = " . $selectedQuizId;
                             $result = mysqli_query($conn, $sql);
-
-                            $test = 6;
 
                             if (mysqli_num_rows($result) > 0) {
                                 while($row = mysqli_fetch_assoc($result)) {
                                     $sql2 = "SELECT answerContent, answerID
                                      FROM answers
-                                     WHERE questionID = " . $test;
+                                     WHERE questionID = " . $row[questionID];
                                     $result2 = mysqli_query($conn, $sql2);
                                         echo "<h4>Question " . $i . "</h4>
                                           <p>" . $row[questionContent] . "</p>";
                                             if (mysqli_num_rows($result2) > 0) {
                                                 while($row = mysqli_fetch_assoc($result2)) {
                                                     echo "<input type='radio' 
-                                                            name='answer" . $test . "' 
+                                                            name='answer" . $i . "' 
                                                             value='" . $row[answerID] . 
                                                             "'>" . 
                                                             $row[answerContent] . 
@@ -64,15 +67,21 @@
                                                 echo "No results found.";
                                             }
                                     ++$i;
-                                    ++$test;
                                 }
                             } else {
                                 echo "No results found.";
                             }
                         ?>
-                    </form>
                     
-                    <button type="button" class="btn btn-primary">Submit</button>
+                <input type="text" name="studentEmail" value="Email" autofocus=""><br>
+            <input type="text" name="studentFName" value="First Name"><br>
+            <input type="text" name="studentLName" value="Last name"><br>
+            <input type="text" name="studentId" value="Student ID"><br>
+
+            <input type="submit" value="Submit">
+            </form>
+
+                     
                 </div>
             </div>
         </div>
