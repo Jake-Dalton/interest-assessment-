@@ -77,8 +77,8 @@
                                     while($row = mysqli_fetch_assoc($result2)) {
                                         echo "<input type='radio' 
                                                             name='answer" . $i . "' 
-                                                            value='" . $row[answerID] . 
-                                            "'>" . 
+                                                            value='" . $row[answerID] . "'
+                                                            required >" . 
                                             $row[answerContent] . 
                                             "<br>";
                                     }
@@ -92,10 +92,15 @@
                         }
                         ?>
 
-                        <input type="text" name="studentEmail" value="Email"><br>
-                        <input type="text" name="studentFName" value="First Name"><br>
-                        <input type="text" name="studentLName" value="Last name"><br>
-                        <input type="text" name="studentId" value="Student ID"><br>
+                        <input type="text" name="studentEmail" placeholder="Email" required><span class="required"> *</span><br>
+                        <input type="text" name="studentFName" placeholder="First Name" required><span class="required"> *</span><br>
+                        <input type="text" name="studentLName" placeholder="Last name" required><span class="required"> *</span><br>
+                        <input type="text" name="studentId" placeholder="Student ID"><br>
+                        
+                        <?php
+                        echo "<input type='hidden' name='selectedQuizID' value='" . $selectedQuizId . "'>";
+                        echo "<input type='hidden' name='numOfQuestions' value='" . $i . "'>";
+                        ?>
 
                         <input type="submit" value="Submit">
                     </form>
