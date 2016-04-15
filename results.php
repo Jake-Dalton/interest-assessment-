@@ -11,7 +11,8 @@
         <!-- Optional theme -->
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap-theme.min.css" integrity="sha384-fLW2N01lMqjakBkx3l/M9EahuwpSfeNvV63J5ezn3uZzapT0u7EYsXMjQV+0En5r" crossorigin="anonymous" />
         <!-- user edit css -->
-        <link rel="stylesheet" type="text/css" href="css/results.css" />
+        <link rel="stylesheet" type="text/css" href="css/results.css" media="screen" />
+        <link rel="stylesheet" type="text/css" href="css/resultsPrint.css" media="print"/>
         <!-- Latest compiled and minified JavaScript -->
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
     </head>
@@ -45,29 +46,29 @@
             $lName = htmlspecialchars($_POST['studentLName']);
             $studentId = intval($_POST['studentId']);
 
-            // echo testing
-            echo "Quiz ID: " . $selectedQuizID . "<br>" . 
-                "Number of Questions: " . $numOfQuestions . "<br>" . 
-                "Selected Answer 1: " . $selectedAnswer1 . "<br>" .  
-                "Selected Answer 2: " . $selectedAnswer2  . "<br>" . 
-                "Selected Answer 3: " . $selectedAnswer3  . "<br>" . 
-                "Selected Answer 4: " . $selectedAnswer4  . "<br>" . 
-                "Selected Answer 5: " . $selectedAnswer5  . "<br>" . 
-                "Email: " . $email  . "<br>" . 
-                "First Name: " . $fName  . "<br>". 
-                "Last Name: " . $lName  . "<br>". 
-                "Student ID: " . $studentId . "<br>";
-
-            // end echo testing
+            //            // echo testing
+            //            echo "Quiz ID: " . $selectedQuizID . "<br>" . 
+            //                "Number of Questions: " . $numOfQuestions . "<br>" . 
+            //                "Selected Answer 1: " . $selectedAnswer1 . "<br>" .  
+            //                "Selected Answer 2: " . $selectedAnswer2  . "<br>" . 
+            //                "Selected Answer 3: " . $selectedAnswer3  . "<br>" . 
+            //                "Selected Answer 4: " . $selectedAnswer4  . "<br>" . 
+            //                "Selected Answer 5: " . $selectedAnswer5  . "<br>" . 
+            //                "Email: " . $email  . "<br>" . 
+            //                "First Name: " . $fName  . "<br>". 
+            //                "Last Name: " . $lName  . "<br>". 
+            //                "Student ID: " . $studentId . "<br>";
+            //
+            //            // end echo testing
 
             // Find out if selected answers are correct
             $i = 1;
             while ($i <= $numOfQuestions) {
 
                 $sql = "SELECT * 
-                    FROM answers
-                    WHERE isCorrect = 1 
-                    AND answerID = " . ${selectedAnswer . $i};
+                        FROM answers
+                        WHERE isCorrect = 1 
+                        AND answerID = " . ${selectedAnswer . $i};
 
                 $result = mysqli_query($conn, $sql);
 
@@ -80,11 +81,11 @@
                 $i++;
             }
 
-            echo "<br> Number Correct: " . $numCorrect;
+            //            echo "<br> Number Correct: " . $numCorrect;
 
             $percentCorrect = $numCorrect / $numOfQuestions;
 
-            echo "<br> Precent Correct: " . $percentCorrect * 100 . "%";
+            //            echo "<br> Precent Correct: " . $percentCorrect * 100 . "%";
 
             ?>
 
@@ -92,13 +93,34 @@
                 <div class="col-lg-6">
                     <div class="panel panel-default">
                         <div class="panel-body">
-                            <h4>Your test score:</h4>
+                            <?php
+                            echo "<h4>Test results for " . $fName . " " . $lName . "</h4>";
+                            ?>
                             <ul>
-                                <li>You took the ___ test.</li>
-                                <li>You got a 60%</li>
+                                <?php
+                                $sql = "SELECT quizName
+                                        FROM quizzes
+                                        WHERE quizID = " . $selectedQuizID;
+
+                                $result = mysqli_query($conn, $sql);
+
+                                if (mysqli_num_rows($result) > 0) {
+                                    while($row = mysqli_fetch_assoc($result)) {
+                                        echo "<li>You completed the " . $row[quizName] . " assesment test.</li>";
+                                    }
+                                } else {
+                                    echo "No results found.";
+                                }
+                                ?>
+                                <?php echo "<li>Your score was: " . $percentCorrect * 100 . "%</li>"; ?>
                             </ul>
                             <div class="text-right">
-                                <button type="button" class="btn btn-default">Print Now</button>
+                                <button onclick="printThis()" type="button" class="btn btn-default">Print Now</button>
+                                <script>
+                                    function printThis() {
+                                        window.print();
+                                    }
+                                </script>
                             </div>
                         </div>
                     </div>
@@ -108,12 +130,37 @@
                         <div class="panel-body">
                             <h4>Instructor Info:</h4>
                             <ul>
-                                <li>Billy Joel</li>
-                                <li>(208)999-1234</li>
-                                <li>BillyJ@mycwi.cc</li>
+                                <?php
+                                $sql = "SELECT instructorFirst, instructorLast, instructorEmail, instructorPhone
+                                        FROM instructors
+                                        WHERE instructorID = " . $selectedQuizID;
+
+                                $result = mysqli_query($conn, $sql);
+
+                                if (mysqli_num_rows($result) > 0) {
+                                    while($row = mysqli_fetch_assoc($result)) {
+                                        echo "<li>" . $row[instructorFirst] . " " .  $row[instructorLast] . "</li>";
+                                        echo "<li>" . $row[instructorPhone] . "</li>";
+                                        echo "<li>" . $row[instructorEmail] . "</li>";
+                                    }
+                                } else {
+                                    echo "No results found.";
+                                }
+                                ?>
                             </ul>
                             <div class="text-right">
-                                <button type="button" class="btn btn-default">Email Now</button>
+                                <?php
+                                $sql = "SELECT instructorEmail
+                                        FROM instructors
+                                        WHERE instructorID = " . $selectedQuizID;
+
+                                $result = mysqli_query($conn, $sql);
+                                if (mysqli_num_rows($result) > 0) {
+                                    while ($row = mysqli_fetch_assoc($result)) {
+                                        echo "<button type='button' class='btn btn-default'><a href='mailto:" . $row[instructorEmail] . "?Subject=Test%20Results'>Email Now</a></button>";
+                                    }
+                                }
+                                ?>
                             </div>
                         </div>
                     </div>
