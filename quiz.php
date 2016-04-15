@@ -26,12 +26,17 @@
         <!-- Optional theme -->
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap-theme.min.css" integrity="sha384-fLW2N01lMqjakBkx3l/M9EahuwpSfeNvV63J5ezn3uZzapT0u7EYsXMjQV+0En5r" crossorigin="anonymous">
 
+		<!-- quiz css -->
+    <link rel="stylesheet" type="text/css" href="css/quiz.css">
         <!-- Latest compiled and minified JavaScript -->
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
     </head>
 
     <body>
-        <div class="container">
+	  <div class="container">
+        <div class="jumbotron">
+            <img id="logo" src="images/Logo.png" alt="CWI logo" />	
+        </div>
 
             <?php
             $selectedQuizId = htmlspecialchars($_POST['quizSelect']);
@@ -87,7 +92,7 @@
                         }
                         ?>
 
-                        <input type="text" name="studentEmail" value="Email" autofocus=""><br>
+                        <input type="text" name="studentEmail" value="Email"><br>
                         <input type="text" name="studentFName" value="First Name"><br>
                         <input type="text" name="studentLName" value="Last name"><br>
                         <input type="text" name="studentId" value="Student ID"><br>
@@ -97,5 +102,6 @@
                 </div>
             </div>
         </div>
-    </body>
+	</div>
+ </body>
 </html>
