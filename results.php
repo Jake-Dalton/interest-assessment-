@@ -157,7 +157,7 @@
                                 $result = mysqli_query($conn, $sql);
                                 if (mysqli_num_rows($result) > 0) {
                                     while ($row = mysqli_fetch_assoc($result)) {
-                                        echo "<button type='button' class='btn btn-default'><a href='mailto:" . $row[instructorEmail] . "?Subject=Test%20Results'>Email Now</a></button>";
+                                        echo "<button type='button' class='btn btn-default'><a style='color:black; text-decoration:none;' href='mailto:" . $row[instructorEmail] . "?Subject=Test%20Results'>Email Now</a></button>";
                                     }
                                 }
                                 ?>
