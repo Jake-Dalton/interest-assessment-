@@ -149,7 +149,7 @@
                                 ?>
                             </ul>
                             <div class="text-right">
-                                <?php
+                                <button type='button' class='btn btn-default'><a style='color: black; text-decoration:none;' href='mailto:<?php
                                 $sql = "SELECT instructorEmail
                                         FROM instructors
                                         WHERE instructorID = " . $selectedQuizID;
@@ -157,10 +157,10 @@
                                 $result = mysqli_query($conn, $sql);
                                 if (mysqli_num_rows($result) > 0) {
                                     while ($row = mysqli_fetch_assoc($result)) {
-                                        echo "<button type='button' class='btn btn-default'><a style='color:black; text-decoration:none;' href='mailto:" . $row[instructorEmail] . "?Subject=Test%20Results'>Email Now</a></button>";
+                                        echo $row[instructorEmail];
                                     }
                                 }
-                                ?>
+                                ?>?Subject=Test%20Results'>Email Now</a></button>
                             </div>
                         </div>
                     </div>
