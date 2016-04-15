@@ -46,7 +46,7 @@
                             echo "No results found.";
                         }
                         ?>
-                        <input type="submit" value="Submit">
+                        <input class="btn btn-default" type="submit" value="Submit">
                     </form>
                 </div>
             </div>
