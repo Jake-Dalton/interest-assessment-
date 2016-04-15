@@ -102,7 +102,7 @@
                         echo "<input type='hidden' name='numOfQuestions' value='" . $i . "'>";
                         ?>
 
-                        <input type="submit" value="Submit">
+                        <input class="btn btn-default" type="submit" value="Submit">
                     </form>
                 </div>
             </div>
