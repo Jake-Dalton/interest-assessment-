@@ -1,4 +1,4 @@
-﻿/*********Color Palette*********
+/*********Color Palette*********
 Maroon:   		#780000
 Yellow: 		#EEB111
 White: 			#FFFFFF
@@ -32,4 +32,8 @@ Drk. Beige:		#D8D9AD
 	background: #EEB111;
 	text-shadow: none;
 	border: 1px solid #780000;
-	}
+}
+
+.required {
+    color: red;
+}
