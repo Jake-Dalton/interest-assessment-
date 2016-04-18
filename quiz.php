@@ -106,18 +106,7 @@
 
                         <input class="btn btn-default" name="submit" type="submit" value="Submit">
                     </form>
-                    <?php
-                    if($_POST) {
-                        $mysqltime = date("Y-m-d H:i:s");
-                                                
-                        $sql = "INSERT INTO responses 
-                                (responseID, quizID, studentEmail, studentFirst, studentLast, studentCwiID, submitTime, selectedAnswer1, selectedAnswer2)
-                                VALUES
-                                (null, 1, '" . $_POST['studentEmail'] . "', 'testfirst', 'testlast', '12345', '" . $mysqltime . "', '23', '25')";
-                        
-                        $result = mysqli_query($conn, $sql);
-                    }
-                    ?>
+                    
                 </div>
             </div>
         </div>

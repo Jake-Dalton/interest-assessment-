@@ -18,6 +18,23 @@
     </head>
 
     <body>
+    
+    <?php
+                     
+                        $mysqltime = date("Y-m-d H:i:s");
+                               
+						$studentEmail = htmlspecialchars($_POST['studentEmail']);
+						$studentFName = htmlspecialchars($_POST['studentFName']);
+						$studentLName = htmlspecialchars($_POST['studentLName']);
+						$studentId    = htmlspecialchars($_POST['studentId']);            
+                        $sql = "INSERT INTO responses 
+                                (responseID, quizID, studentEmail, studentFirst, studentLast, studentCwiID, submitTime, selectedAnswer1, selectedAnswer2)
+                                VALUES
+                                (null, 4, '$studentEmail', '$studentFName', '$studentLName', '$studentId', '" . $mysqltime . "', '23', '25')";
+                        
+                        $result = mysqli_query($conn, $sql);
+                    
+                    ?>
         <div class="container">
             <div class="jumbotron">
                 <img id="logo" src="images/Logo.png" />   
