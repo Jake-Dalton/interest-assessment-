@@ -26,7 +26,7 @@
                 <div>
                 </div>
             </div>
-            <form class="form-signin">
+            <form class="form-signin" method="post" action="admin.php">
                 <label for="inputEmail" class="sr-only">Email address</label>
                 <input type="email" id="inputEmail" class="form-control" placeholder="Email address" required autofocus>
                 <label for="inputPassword" class="sr-only">Password</label>
@@ -34,7 +34,7 @@
                 <div class="checkbox">
 
                 </div>
-                <button class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>
+                <input class="btn btn-lg btn-primary btn-block" type="submit" value="Sign in">
             </form>
 
         </div>
