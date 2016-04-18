@@ -114,6 +114,7 @@
                                 }
                                 ?>
                                 <?php echo "<li>Your score was: " . $percentCorrect . "%</li>"; ?>
+                                <?php echo "<li>Placeholder Bullet for Box formatting</li>"; ?>
                             </ul>
                             <div class="text-right">
                                 <button onclick="printThis()" type="button" class="btn btn-default">Print Now</button>
@@ -131,7 +132,7 @@
                         <div class="panel-body">
                             <h4>Instructor Info:</h4>
                             <ul>
-                                <!--Need to update this SELECT statement to join with quizzes rather than just use the quizID as the instructorID -->
+                                <!-- Need to update this SELECT statement to join with quizzes rather than just use the quizID as the instructorID -->
                                 <?php
                                 $sql = "SELECT instructorFirst, instructorLast, instructorEmail, instructorPhone
                                         FROM instructors
@@ -141,9 +142,9 @@
 
                                 if (mysqli_num_rows($result) > 0) {
                                     while($row = mysqli_fetch_assoc($result)) {
-                                        echo "<li>" . $row[instructorFirst] . " " .  $row[instructorLast] . "</li>";
-                                        echo "<li>" . $row[instructorPhone] . "</li>";
-                                        echo "<li>" . $row[instructorEmail] . "</li>";
+                                        echo "<li><b>Name:</b> " . $row[instructorFirst] . " " .  $row[instructorLast] . "</li>";
+                                        echo "<li><b>Phone:</b> " . $row[instructorPhone] . "</li>"; // Formatting of phone number?
+                                        echo "<li><b>Email:</b> " . $row[instructorEmail] . "</li>";
                                     }
                                 } else {
                                     echo "No results found.";
