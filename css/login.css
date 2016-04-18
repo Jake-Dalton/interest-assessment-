@@ -10,7 +10,8 @@ Drk. Beige:		#D8D9AD
 }
 .btn.btn-block:hover {
 	background: #780000;
-	border: 1px solid #DF9D0F;  
+	border: 1px solid #DF9D0F;
+    color: #ffffff;  
 	}
 
 .btn.btn-block {
@@ -19,6 +20,8 @@ Drk. Beige:		#D8D9AD
 	background: #EEB111;
 	text-shadow: none;
 	border: 1px solid #780000;
+    margin-bottom: 15px;
+ 
 	}
 
 .form-control {
