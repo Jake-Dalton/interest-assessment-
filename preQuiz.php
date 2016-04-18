@@ -17,27 +17,27 @@
     </head>
     
     <body>
-        <div class="container">
-            <div class="jumbotron">
-              <img id="logo" src="images/Logo.png" />
-              <div class="row text-right">
-                <div class="col-lg-12">
-                  <p>Admin Login</p>
-                  <span>
-                    <a href="login.php">
-                      <button type="button" class="btn btn-default">Log In</button>
-                    </a>
-                  </span>
-                </div>
-              </div>
+      <div class="container">
+        <div class="jumbotron">
+          <img id="logo" src="images/Logo.png" />
+          <div class="row text-right">
+            <div class="col-lg-12">
+              <p>Admin Login</p>
+              <span>
+                <a href="login.php">
+                  <button type="button" class="btn btn-default">Log In</button>
+                </a>
+              </span>
             </div>
-
-        <div class="panel-body">
+          </div>
+        </div>
+        <div class="panel panel-default">
+          <div class="panel-body">
             <h2 class="text-left">This is NOT a test!</h2>
-              <p class="text-left">This is not a test to determine if you get into the program.  This is simply a tool to help us understand your current skill level and help you determine if a specific program is a good fit.  Click below to begin the quiz!</p>
+            <p class="text-left">This is not a test to determine if you get into the program.  This is simply a tool to help us understand your current skill level and help you determine if a specific program is a good fit.  Click below to begin the quiz!</p>
 
-                    <form action="quiz.php" method="post">
-                        <?php
+            <form action="quiz.php" method="post">
+              <?php
                         $sql = "SELECT quizName, 
                                    quizID
                             FROM quizzes";
@@ -50,9 +50,10 @@
                             echo "No results found.";
                         }
                         ?>
-                        <input class="btn btn-default" type="submit" value="Submit">
+              <input class="btn btn-default" type="submit" value="Submit">
                     </form>
-                </div>
             </div>
+          </div>
+        </div>
       </body>
 </html>
