@@ -36,15 +36,10 @@ Drk. Beige:		#D8D9AD
 	background: #EEB111;
 	text-shadow: none;
 	border: 1px solid #780000;
-    margin: 10px 5px;
+    margin: 10px 0px;
 	}
 
 input {
 float: left;
-padding: 5px;
 }
 
-
-#quizName {
-float: left;
-} 
