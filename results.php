@@ -83,7 +83,7 @@
 
             //            echo "<br> Number Correct: " . $numCorrect;
 
-            $percentCorrect = $numCorrect / $numOfQuestions;
+            $percentCorrect = ($numCorrect / $numOfQuestions) * 100;
 
             //            echo "<br> Precent Correct: " . $percentCorrect * 100 . "%";
 
@@ -112,7 +112,7 @@
                                     echo "No results found.";
                                 }
                                 ?>
-                                <?php echo "<li>Your score was: " . $percentCorrect * 100 . "%</li>"; ?>
+                                <?php echo "<li>Your score was: " . round($percentCorrect) . "%</li>"; ?>
                             </ul>
                             <div class="text-right">
                                 <button onclick="printThis()" type="button" class="btn btn-default">Print Now</button>
