@@ -19,18 +19,22 @@
     <body>
         <div class="container">
             <div class="jumbotron">
-                <img id="logo" src="images/Logo.png" />
+              <img id="logo" src="images/Logo.png" />
+              <div class="row text-right">
+                <div class="col-lg-12">
+                  <p>Admin Login</p>
+                  <span>
+                    <a href="login.php">
+                      <button type="button" class="btn btn-default">Log In</button>
+                    </a>
+                  </span>
+                </div>
+              </div>
             </div>
 
-            <div class="panel panel-default text-center">
-                <div class="panel-heading" class="row text-center">
-
-                    <div>
-                    </div>
-                </div>
-                <div class="panel-body">
-                    <h2 class="text-center">This is NOT a test!</h2>
-                    <p>This is not a test determining whether you get into the program or not. This is simply a mannar of helping us determine where your current skills are placed, to help us better understand your current skill level.  Click below to begin the quiz!</p>
+        <div class="panel-body">
+            <h2 class="text-left">This is NOT a test!</h2>
+              <p class="text-left">This is not a test to determine if you get into the program.  This is simply a tool to help us understand your current skill level and help you determine if a specific program is a good fit.  Click below to begin the quiz!</p>
 
                     <form action="quiz.php" method="post">
                         <?php
@@ -50,6 +54,5 @@
                     </form>
                 </div>
             </div>
-        </div>
-    </body>
+      </body>
 </html>
