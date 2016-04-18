@@ -17,13 +17,34 @@
 </head>
     
 <body>
+
+<?php 
+// this is to display the instructor info and their quiz
+        $emailSubmitted = htmlspecialchars($_POST['instructorEmail']);
+        
+        $sql = "SELECT instructors.instructorID, instructors.instructorEmail, quizzes.quizID, quizzes.quizName, instructors.instructorFirst, instructors.instructorLast FROM instructors JOIN quizzes WHERE instructors.instructorID = quizzes.instructorID AND instructors.instructorEmail = '" . $emailSubmitted."'";
+        $result = mysqli_query($conn, $sql);
+        if (mysqli_num_rows($result) > 0) {
+                            while($row = mysqli_fetch_assoc($result)) {
+                                $quizID = $row['quizID'];
+                                $quizName = $row['quizName'];
+                                $instructorName = $row['instructorFirst']. " " .$row['instructorLast'];
+                            }
+                        } else {
+                            echo "no results found";
+                            echo "<br> ".$emailSubmitted;
+                        }
+?>
+
+
+
     <div class="container">
         <div class="jumbotron">
             <img id="logo" src="images/Logo.png" />	
             <h3>Admin Panel</h3>
             <div class="row text-right">
                 <div class="col-lg-12">
-                    <p>Admin Name Here</p><span><a href="login.html"><button type="button" class="btn btn-default">Log Out</button></a></span></p>
+                    <p><?php echo $instructorName; ?></p><span><a href="login.html"><button type="button" class="btn btn-default">Log Out</button></a></span></p>
                 </div>
             </div>
         </div>
@@ -32,19 +53,36 @@
             <h4>Quiz Results</h4>
             <table class="table table-bordered">
                 <tr>
-                    <th>Heading</th>
-                    <th>Heading</th>
-                    <th>Heading</th>
-                    <th>Heading</th>
-                    <th>Heading</th>
-                    <th>Heading</th>
-                    <th>Heading</th>
+                    <th>Student First Name</th>
+                    <th>Student Last Name</th>
+                    <th>Student Email</th>
+                    <th>Student CWI ID</th>
+                    <th>Quiz Taken</th>
+                    <th>Score</th>
                 </tr>
+                <?php
+    $sql = "SELECT * FROM responses WHERE quizID = ".$quizID;
+    $result = mysqli_query($conn, $sql);
+        if (mysqli_num_rows($result) > 0) {
+                            while($row = mysqli_fetch_assoc($result)) {
+                             echo "<tr> 
+                                <td>".$row['studentFirst']."</td>
+                                <td>".$row['studentLast']."</td>
+                                <td>".$row['studentEmail']."</td>
+                                <td>".$row['studentCwiID']."</td>
+                                <td>".$row['submitTime']."</td>
+                                <td></td>
+                             </tr>";
+                            }
+                        } else {
+                            echo "no results found";
+                        }
+?>
                 <tr>
                     <td>Data</td>
                     <td>Data</td>
                     <td>Data</td>
-                    <td>Data</td>
+                    <td><?php echo $quizName ?></td>
                     <td>Data</td>
                     <td>Data</td>
                 <td>
@@ -57,7 +95,7 @@
 
         <div class="row" id="yourQuiz">
             <div class="col-lg-12">
-                <h4>Your Quiz</h4>
+                <h4><?php echo $quizName ?></h4>
                 <div class="panel panel-default">
                     <div class="panel-body">
                         YOUR QUIZ NAME & SOME DETAILS?
@@ -69,3 +107,5 @@
     </div> <!-- container -->
 </body>
 </html>
+
+
