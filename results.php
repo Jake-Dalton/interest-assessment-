@@ -18,25 +18,6 @@
     </head>
 
     <body>
-
-        <?php
-
-        $mysqltime = date("Y-m-d H:i:s");
-
-        $studentEmail = htmlspecialchars($_POST['studentEmail']);
-        $studentFName = htmlspecialchars($_POST['studentFName']);
-        $studentLName = htmlspecialchars($_POST['studentLName']);
-        $studentID    = intval($_POST['studentID']);
-        $quizID = intval($_POST['selectedQuizID']);
-        
-        $sql = "INSERT INTO responses 
-                (responseID, quizID, studentEmail, studentFirst, studentLast, studentCwiID, studentScore, submitTime)
-                VALUES
-                (null, '$quizID', '$studentEmail', '$studentFName', '$studentLName', '$studentID', 0,'$mysqltime')";
-
-        $result = mysqli_query($conn, $sql);
-
-        ?>
         <div class="container">
             <div class="jumbotron">
                 <img id="logo" src="images/Logo.png" />   
@@ -103,6 +84,7 @@
             //            echo "<br> Number Correct: " . $numCorrect;
 
             $percentCorrect = ($numCorrect / $numOfQuestions) * 100;
+            $percentCorrect = round($percentCorrect);
 
             //            echo "<br> Precent Correct: " . $percentCorrect * 100 . "%";
 
@@ -131,7 +113,7 @@
                                     echo "No results found.";
                                 }
                                 ?>
-                                <?php echo "<li>Your score was: " . round($percentCorrect) . "%</li>"; ?>
+                                <?php echo "<li>Your score was: " . $percentCorrect . "%</li>"; ?>
                             </ul>
                             <div class="text-right">
                                 <button onclick="printThis()" type="button" class="btn btn-default">Print Now</button>
@@ -149,7 +131,7 @@
                         <div class="panel-body">
                             <h4>Instructor Info:</h4>
                             <ul>
-                                <!--Need to update this SELECT statement to join with quizzes to get information more accurately -->
+                                <!--Need to update this SELECT statement to join with quizzes rather than just use the quizID as the instructorID -->
                                 <?php
                                 $sql = "SELECT instructorFirst, instructorLast, instructorEmail, instructorPhone
                                         FROM instructors
@@ -187,5 +169,24 @@
                 </div>
             </div>
         </div> <!-- closes container -->
+
+        <!-- Insert information into the database -->
+        <?php
+
+        $quizID = intval($_POST['selectedQuizID']);
+        $studentEmail = htmlspecialchars($_POST['studentEmail']);
+        $studentFName = htmlspecialchars($_POST['studentFName']);
+        $studentLName = htmlspecialchars($_POST['studentLName']);
+        $studentID    = intval($_POST['studentID']);        
+        $mysqltime = date("Y-m-d H:i:s");
+
+        $sql = "INSERT INTO responses 
+                (responseID, quizID, studentEmail, studentFirst, studentLast, studentCwiID, studentScore, submitTime)
+                VALUES
+                (null, '$quizID', '$studentEmail', '$studentFName', '$studentLName', '$studentID', '$percentCorrect', '$mysqltime')";
+
+        $result = mysqli_query($conn, $sql);
+
+        ?>
     </body>
 </html>
