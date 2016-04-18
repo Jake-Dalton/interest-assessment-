@@ -18,23 +18,25 @@
     </head>
 
     <body>
-    
-    <?php
-                     
-                        $mysqltime = date("Y-m-d H:i:s");
-                               
-						$studentEmail = htmlspecialchars($_POST['studentEmail']);
-						$studentFName = htmlspecialchars($_POST['studentFName']);
-						$studentLName = htmlspecialchars($_POST['studentLName']);
-						$studentId    = htmlspecialchars($_POST['studentId']);            
-                        $sql = "INSERT INTO responses 
-                                (responseID, quizID, studentEmail, studentFirst, studentLast, studentCwiID, submitTime, selectedAnswer1, selectedAnswer2)
-                                VALUES
-                                (null, 4, '$studentEmail', '$studentFName', '$studentLName', '$studentId', '" . $mysqltime . "', '23', '25')";
-                        
-                        $result = mysqli_query($conn, $sql);
-                    
-                    ?>
+
+        <?php
+
+        $mysqltime = date("Y-m-d H:i:s");
+
+        $studentEmail = htmlspecialchars($_POST['studentEmail']);
+        $studentFName = htmlspecialchars($_POST['studentFName']);
+        $studentLName = htmlspecialchars($_POST['studentLName']);
+        $studentID    = intval($_POST['studentID']);
+        $quizID = intval($_POST['selectedQuizID']);
+        
+        $sql = "INSERT INTO responses 
+                (responseID, quizID, studentEmail, studentFirst, studentLast, studentCwiID, studentScore, submitTime)
+                VALUES
+                (null, '$quizID', '$studentEmail', '$studentFName', '$studentLName', '$studentID', 0,'$mysqltime')";
+
+        $result = mysqli_query($conn, $sql);
+
+        ?>
         <div class="container">
             <div class="jumbotron">
                 <img id="logo" src="images/Logo.png" />   
@@ -61,7 +63,7 @@
             $email = htmlspecialchars($_POST['studentEmail']);
             $fName = htmlspecialchars($_POST['studentFName']);
             $lName = htmlspecialchars($_POST['studentLName']);
-            $studentId = intval($_POST['studentId']);
+            $studentID = intval($_POST['studentID']);
 
             //            // echo testing
             //            echo "Quiz ID: " . $selectedQuizID . "<br>" . 
@@ -147,6 +149,7 @@
                         <div class="panel-body">
                             <h4>Instructor Info:</h4>
                             <ul>
+                                <!--Need to update this SELECT statement to join with quizzes to get information more accurately -->
                                 <?php
                                 $sql = "SELECT instructorFirst, instructorLast, instructorEmail, instructorPhone
                                         FROM instructors
@@ -167,36 +170,22 @@
                             </ul>
                             <div class="text-right">
                                 <button type='button' class='btn btn-default'><a style='color: black; text-decoration:none;' href='mailto:<?php
-                                $sql = "SELECT instructorEmail
+                                    $sql = "SELECT instructorEmail
                                         FROM instructors
                                         WHERE instructorID = " . $selectedQuizID;
 
-                                $result = mysqli_query($conn, $sql);
-                                if (mysqli_num_rows($result) > 0) {
-                                    while ($row = mysqli_fetch_assoc($result)) {
-                                        echo $row[instructorEmail];
+                                    $result = mysqli_query($conn, $sql);
+                                    if (mysqli_num_rows($result) > 0) {
+                                        while ($row = mysqli_fetch_assoc($result)) {
+                                            echo $row[instructorEmail];
+                                        }
                                     }
-                                }
-                                ?>?Subject=Test%20Results'>Email Now</a></button>
+                                    ?>?Subject=Test%20Results'>Email Now</a></button>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
-
-            <!--
-<div class="panel panel-default">
-<div class="panel-heading text-center">
-<h3 class="panel-title">Your Test</h3>
-</div>
-<div class="panel-body">
-<h4>Question 1</h4>
-<p>What is blah blah of the bloborian root of blah?   <span class="glyphicon glyphicon-ok"> </span></p>
-<h4>Question 2</h4>
-<p>What is blah blah of the bloborian root of blah?   <span class="glyphicon glyphicon-remove"> </span></p>
-</div>
-</div>
--->
         </div> <!-- closes container -->
     </body>
 </html>
