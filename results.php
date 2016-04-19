@@ -153,10 +153,10 @@
                                 ?>
                             </ul>
                             <div class="text-right">
-                                <button type='button' class='btn btn-default'><a style='color:black; text-decoration:none;' href='mailto:<?php
+                                <button type='button' class='btn btn-default'><a href='mailto:<?php
                                     $sql = "SELECT instructorEmail
-                                        FROM instructors
-                                        WHERE instructorID = " . $selectedQuizID;
+                                        FROM instructors JOIN quizzes 
+                                        WHERE quizzes.instructorID = instructors.instructorID AND quizzes.quizID =" . $selectedQuizID;
 
                                     $result = mysqli_query($conn, $sql);
                                     if (mysqli_num_rows($result) > 0) {
