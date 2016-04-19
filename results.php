@@ -24,7 +24,7 @@
                 <div class="row text-center">
                     <h3>Results</h3>
                     <div class="col-lg-12">
-                        <button type='button' class='btn btn-default'><a style='color:black; text-decoration:none;' href="index.html">Home</a></button>
+                        <button type='button' class='btn btn-default'><a href="index.html">Home</a></button>
                     </div>
                 </div>
             </div>
