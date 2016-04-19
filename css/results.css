@@ -17,6 +17,10 @@ Drk. Beige:		#D8D9AD
 	border: 1px solid #780000;
 }
 
+.btn.btn-default a {
+	text-decoration:none;	
+}
+
 .btn.btn-default:hover {
 	background: #780000;
 	color: #FFFFFF; 
