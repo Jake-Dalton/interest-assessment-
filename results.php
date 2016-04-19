@@ -24,6 +24,7 @@
                 <div class="row text-center">
                     <h3>Results</h3>
                     <div class="col-lg-12">
+                        <button type='button' class='btn btn-default'><a style='color:black; text-decoration:none;' href="index.html">Home</a></button>
                     </div>
                 </div>
             </div>
@@ -134,9 +135,9 @@
                             <ul>
                                 <!-- Need to update this SELECT statement to join with quizzes rather than just use the quizID as the instructorID -->
                                 <?php
-                                $sql = "SELECT instructorFirst, instructorLast, instructorEmail, instructorPhone
-                                        FROM instructors
-                                        WHERE instructorID = " . $selectedQuizID;
+                                $sql = "SELECT instructors.instructorPhone, instructors.instructorEmail, instructors.instructorFirst, instructors.instructorLast 
+                                        FROM instructors JOIN quizzes 
+                                        WHERE quizzes.instructorID = instructors.instructorID AND quizzes.quizID =" . $selectedQuizID;
 
                                 $result = mysqli_query($conn, $sql);
 
@@ -152,7 +153,7 @@
                                 ?>
                             </ul>
                             <div class="text-right">
-                                <button type='button' class='btn btn-default'><a style='color: black; text-decoration:none;' href='mailto:<?php
+                                <button type='button' class='btn btn-default'><a style='color:black; text-decoration:none;' href='mailto:<?php
                                     $sql = "SELECT instructorEmail
                                         FROM instructors
                                         WHERE instructorID = " . $selectedQuizID;
