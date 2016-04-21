@@ -20,16 +20,12 @@
       <div class="container">
         <div class="jumbotron">
           <img id="logo" src="images/Logo.png" />
-          <div class="row text-right">
-            <div class="col-lg-12">
-              <p>Admin Login</p>
-              <span>
-                <a href="login.php">
-                  <button type="button" class="btn btn-default">Log In</button>
-                </a>
-              </span>
-            </div>
-          </div>
+          <p>Admin Login</p>
+          <span>
+            <a href="login.php">
+              <button type="button" class="btn btn-default">Log In</button>
+            </a>
+          </span>
         </div>
         <div class="panel panel-default">
           <div class="panel-body">
@@ -50,7 +46,7 @@
                             echo "No results found.";
                         }
                         ?>
-              <input class="btn btn-default" type="submit" value="Submit">
+              <input class="btn btn-default" type="submit" value="Start Assessment">
                     </form>
             </div>
           </div>
