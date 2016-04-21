@@ -84,12 +84,8 @@
                 $i++;
             }
 
-            //            echo "<br> Number Correct: " . $numCorrect;
-
             $percentCorrect = ($numCorrect / $numOfQuestions) * 100;
             $percentCorrect = round($percentCorrect);
-
-            //            echo "<br> Precent Correct: " . $percentCorrect * 100 . "%";
 
             ?>
 
@@ -156,17 +152,18 @@
               </ul>
               <div class="text-right">
                 <button type="button" class="btn btn-default">
-                  <a href='mailto:'
-                    <?php
+                  <a href='mailto:<?php
                                     $sql = "SELECT instructorEmail
-                                         FROM instructors JOIN quizzes 
-                                        WHERE quizzes.instructorID = instructors.instructorID AND quizzes.quizID =" . $selectedQuizID;
+                                            FROM instructors JOIN quizzes 
+                                            WHERE quizzes.instructorID = instructors.instructorID AND quizzes.quizID =" . $selectedQuizID;
 
                                     $result = mysqli_query($conn, $sql);
                                     if (mysqli_num_rows($result) > 0) {
                                         while ($row = mysqli_fetch_assoc($result)) {
                                             echo $row[instructorEmail];
                                         }
+                                    } else {
+                                        echo "No results found.";
                                     }
                                     ?>?Subject=Test%20Results'>Email Now
                   </a>
@@ -183,7 +180,9 @@
            				<ul>
                 		<?php
 								
-								$sql = "Select quizName, deptURL from quizzes where quizID =" . $selectedQuizID;
+								$sql = "SELECT quizName, deptURL 
+                                        FROM quizzes 
+                                        WHERE quizID =" . $selectedQuizID;
 								$result = mysqli_query($conn, $sql);
                                     if (mysqli_num_rows($result) > 0) {
                                         while ($row = mysqli_fetch_assoc($result)) {
