@@ -1,0 +1,145 @@
+﻿/*********Color Palette*********
+Maroon:   		#780000
+Yellow: 		#EEB111
+White: 			#FFFFFF
+Lt. Beige:		#ECEDD7	
+Drk. Beige:		#D8D9AD
+*******************************/
+
+.btn.btn-default {
+	color: black;
+	font-weight: 600;
+	background: #DF9D0F;
+	text-shadow: none;
+	border: 1px solid #EEB111;
+	}
+
+.btn.btn-default:hover {
+	color: white;
+	font-weight: 600;
+	background: #780000;
+	text-shadow: none;
+	border: 1px solid #780000;
+	}
+
+.btn.btn-default a {
+	color: black;
+    text-decoration: none;
+}
+
+.btn.btn-default a:hover {
+	color: white;
+}
+
+.container {
+	margin:0 5 0 10%;
+}
+
+.container-login {
+max-width: 600px;
+}
+
+form {
+	margin-top: 26px;
+}
+
+form button {
+margin-top: 10px;
+clear: left;
+float: left;
+margin-left: 30%;
+padding-right: 30px;
+}
+
+/*
+form input  {
+	clear: right;
+	display: inline-block;
+	float: left;
+	margin-bottom: 10px;
+	margin-top: 10px;
+	width: 250px;
+}
+*/
+
+/*preQuiz only*/
+input {
+float: left;
+margin-top: 2%;
+}
+
+/*preQuiz*/
+    input[type=radio] {
+    margin-right: 1%;
+    }
+
+.jumbotron {
+	background: #D8D9AD;
+	padding: 0px;
+	width: 100%;
+	height: auto; 
+}
+
+.jumbotron a {
+    float: right; clear: both;
+}
+
+.jumbotron img {
+    padding-top: 30px;
+	padding-bottom: 10px;
+	}
+
+.jumbotron p {
+    float: right;
+	padding-top: 5%;
+	}
+
+.panel-body h3 {
+    padding: 20px 10px 10px 25%;
+    clear: both;
+}
+
+.panel-body h4{
+	
+	padding: 20px 10px 10px 25%;
+	clear: both;
+}
+
+.panel-body label {
+	display: inline;
+	float: left;
+    clear: left;
+    width: 100px;
+    text-align: right;
+    margin: 10px;
+}
+    
+/*
+.panel-body input {
+	
+	float: left;
+	clear: left;
+    
+    text-align: left;
+    margin: 5px 5px 5px 0px;
+}
+*/
+.panel-heading {
+	background: red;
+	}
+
+.panel.panel-default {
+	margin-top: 20px;
+}
+
+.quizResultsWrapper {
+	margin-top: 60px;
+}
+
+#quizResults {
+	margin-top: 60px;
+}
+
+.required {
+    color: red;
+}
