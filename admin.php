@@ -2,6 +2,8 @@
 <html>
     <head>
         <?php require 'connection.php';?>
+		
+		<script src="https://code.jquery.com/jquery-2.2.3.min.js"></script>
 
         <!-- Latest compiled and minified CSS -->
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
@@ -14,10 +16,24 @@
 
         <!-- Latest compiled and minified JavaScript -->
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
-    </head>
+		
+		<link rel="stylesheet" href="https://cdn.datatables.net/1.10.11/css/jquery.dataTables.min.css">
+
+		<!-- DataTable plugin -->
+		<script src="https://cdn.datatables.net/1.10.11/js/jquery.dataTables.min.js"></script>
+		<script>
+			
+			jQuery(function($) {
+				$(document).ready(function() {
+					$("table").DataTable();
+				});
+			});
+		</script>
+		
+	</head>
 
     <body>
-
+		
         <?php 
         // this is to display the instructor info and their quiz
         $emailSubmitted = htmlspecialchars($_POST['instructorEmail']);
@@ -60,6 +76,7 @@
                         <th>Student CWI ID</th>
                         <th>Quiz Taken</th>
                         <th>Score</th>
+						<th></th>
                     </tr>
                 </thead>
                 <tbody>
@@ -136,6 +153,7 @@
             </div>
         </div><!--Your Quiz Row -->
         </div> <!-- container -->
+		
     </body>
 </html>
 
