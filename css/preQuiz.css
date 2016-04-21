@@ -20,11 +20,20 @@ Drk. Beige:		#D8D9AD
 	height: auto; 
 }
 
+  .jumbotron a {
+    float: right; clear: both;
+}
+
 .jumbotron img {
     padding-top: 30px;
 	padding-bottom: 10px;
 	}
-
+	
+.jumbotron p {
+    float: right;
+	padding-top: 5%;
+	}
+	
 .btn.btn-default:hover {
 	background: #780000;
 	color: #FFFFFF; 
