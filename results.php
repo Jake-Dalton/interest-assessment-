@@ -11,7 +11,7 @@
     <!-- Optional theme -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap-theme.min.css" integrity="sha384-fLW2N01lMqjakBkx3l/M9EahuwpSfeNvV63J5ezn3uZzapT0u7EYsXMjQV+0En5r" crossorigin="anonymous" />
     <!-- user edit css -->
-    <link rel="stylesheet" type="text/css" href="css/results.css" media="screen" />
+    <link rel="stylesheet" type="text/css" href="css/customstyles.css" media="screen" />
     <link rel="stylesheet" type="text/css" href="css/resultsPrint.css" media="print"/>
     <!-- Latest compiled and minified JavaScript -->
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
@@ -21,14 +21,14 @@
     <div class="container">
       <div class="jumbotron">
         <img id="logo" src="images/Logo.png" />
-        <div class="row text-center">
-          <h3>Results</h3>
-          <div class="col-lg-12">
-            <button type='button' class='btn btn-default'>
+        <p>Results</p>
+        <span>
+          <a href="login.php">
+            <button type='button' class='btn btn-default resultsHomeButton'>
               <a href="index.html">Home</a>
             </button>
-          </div>
-        </div>
+          </a>
+        </span>
       </div>
 
       <?php
@@ -152,7 +152,8 @@
               </ul>
               <div class="text-right">
                 <button type="button" class="btn btn-default">
-                  <a href='mailto:<?php
+                  <a href='mailto:'
+                    <?php
                                     $sql = "SELECT instructorEmail
                                             FROM instructors JOIN quizzes 
                                             WHERE quizzes.instructorID = instructors.instructorID AND quizzes.quizID =" . $selectedQuizID;
@@ -174,11 +175,11 @@
         </div>
       </div>
       <div class="col-lg-13">
-        	<div class="panel panel-default">
-            	<div class="panel-body">
-                <h4>For more information Visit: </h4>
-           				<ul>
-                		<?php
+        <div class="panel panel-default">
+          <div class="panel-body">
+            <h4>For more information Visit: </h4>
+            <ul>
+              <?php
 								
 								$sql = "SELECT quizName, deptURL 
                                         FROM quizzes 
@@ -191,18 +192,18 @@
                                     }
 									else {echo "No Results Found";}
 								?>
-									
-									<li>placeholder</li>
-									<li>placeholder</li>
-						</ul>
-								
-								
-							
-                    
-                </div>
-            </div>    
+
+              <li>placeholder</li>
+              <li>placeholder</li>
+            </ul>
+
+
+
+
+          </div>
         </div>
-    </div>    	
+      </div>
+    </div>
     <!-- closes container -->
 
     <!-- Insert information into the database -->
