@@ -159,8 +159,8 @@
                   <a href='mailto:'
                     <?php
                                     $sql = "SELECT instructorEmail
-                                        FROM instructors
-                                        WHERE instructorID = " . $selectedQuizID;
+                                         FROM instructors JOIN quizzes 
+                                        WHERE quizzes.instructorID = instructors.instructorID AND quizzes.quizID =" . $selectedQuizID;
 
                                     $result = mysqli_query($conn, $sql);
                                     if (mysqli_num_rows($result) > 0) {
@@ -176,7 +176,34 @@
           </div>
         </div>
       </div>
-    </div>
+      <div class="col-lg-13">
+        	<div class="panel panel-default">
+            	<div class="panel-body">
+                <h4>For more information Visit: </h4>
+           				<ul>
+                		<?php
+								
+								$sql = "Select quizName, deptURL from quizzes where quizID =" . $selectedQuizID;
+								$result = mysqli_query($conn, $sql);
+                                    if (mysqli_num_rows($result) > 0) {
+                                        while ($row = mysqli_fetch_assoc($result)) {
+                                            echo "<li> <a href='" . $row[deptURL] . "'>CWI " . $row[quizName] . " Department Page </a></li>";
+                                        }
+                                    }
+									else {echo "No Results Found";}
+								?>
+									
+									<li>placeholder</li>
+									<li>placeholder</li>
+						</ul>
+								
+								
+							
+                    
+                </div>
+            </div>    
+        </div>
+    </div>    	
     <!-- closes container -->
 
     <!-- Insert information into the database -->
