@@ -1,55 +1,115 @@
-<!doctype html>
-<html lang="en">
+<!DOCTYPE html>
+<html>
     <head>
         <?php require 'connection.php';?>
-        <meta charset="utf-8" />
-        <title>Interest Assessment Pre-Quiz</title>
-        
+
+        <?php
+        $selectedQuizID = intval($_POST['quizSelect']);
+
+        $sql = "SELECT quizName
+                        FROM quizzes
+                        WHERE quizID = " . $selectedQuizID;
+        $result = mysqli_query($conn, $sql);
+
+        if (mysqli_num_rows($result) > 0) {
+            while($row = mysqli_fetch_assoc($result)) {
+                echo "<title>" . $row[quizName] . " Assessment Quiz</title>";
+            }
+        } else {
+            echo "No results found.";
+        }
+
+
+        ?>
+
         <!-- Latest compiled and minified CSS -->
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
-        <!-- user edit css -->
-        <link rel="stylesheet" type="text/css" href="css/customstyles.css">
+
         <!-- Optional theme -->
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap-theme.min.css" integrity="sha384-fLW2N01lMqjakBkx3l/M9EahuwpSfeNvV63J5ezn3uZzapT0u7EYsXMjQV+0En5r" crossorigin="anonymous">
 
+        <!-- quiz css -->
+        <link rel="stylesheet" type="text/css" href="css/quiz.css">
         <!-- Latest compiled and minified JavaScript -->
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
     </head>
-    
-    <body>
-      <div class="container">
-        <div class="jumbotron">
-          <img id="logo" src="images/Logo.png" />
-          <p>Admin Login</p>
-          <span>
-            <a href="login.php">
-              <button type="button" class="btn btn-default">Log In</button>
-            </a>
-          </span>
-        </div>
-        <div class="panel panel-default">
-          <div class="panel-body">
-            <h2 class="text-left">This is NOT a test!</h2>
-            <p class="text-left">This is not a test to determine if you get into the program.  This is simply a tool to help us understand your current skill level and help you determine if a specific program is a good fit.  Click below to begin the quiz!</p>
 
-            <form action="quiz.php" method="post">
-              <?php
-                        $sql = "SELECT quizName, 
-                                   quizID
-                            FROM quizzes";
+    <body>
+        <div class="container">
+            <div class="jumbotron">
+                <img id="logo" src="images/Logo.png" alt="CWI logo" />	
+            </div>
+
+            <?php
+            $selectedQuizId = htmlspecialchars($_POST['quizSelect']);
+
+            $sql = "SELECT quizName
+                        FROM quizzes
+                        WHERE quizID = " . $selectedQuizId;
+            $result = mysqli_query($conn, $sql);
+
+            if (mysqli_num_rows($result) > 0) {
+                while($row = mysqli_fetch_assoc($result)) {
+                    echo "<h3>" . $row[quizName] . " Assessment Quiz</h3>";
+                }
+            } else {
+                echo "No results found.";
+            }
+            ?>
+
+            <div class="panel panel-default">
+                <div class="panel-body">
+                    <form action="results.php" method="post">
+                        <?php
+                        $i = 1;
+                        $sql = "SELECT questionContent, questionID
+                                    FROM questions
+                                    WHERE quizID = " . $selectedQuizId;
                         $result = mysqli_query($conn, $sql);
+
                         if (mysqli_num_rows($result) > 0) {
                             while($row = mysqli_fetch_assoc($result)) {
-                                echo "<input type='radio' name='quizSelect' value='" . $row[quizID] . "'>" . $row[quizName] . "</input><br>";
+                                $sql2 = "SELECT answerContent, answerID
+                                     FROM answers
+                                     WHERE questionID = " . $row[questionID];
+                                $result2 = mysqli_query($conn, $sql2);
+                                echo "<h4>Question " . $i . "</h4>
+                                          <p>" . $row[questionContent] . "</p>";
+                                if (mysqli_num_rows($result2) > 0) {
+                                    while($row = mysqli_fetch_assoc($result2)) {
+                                        echo "<input type='radio' 
+                                                            name='answer" . $i . "' 
+                                                            value='" . $row[answerID] . "'
+                                                            required >" . 
+                                            $row[answerContent] . 
+                                            "<br>";
+                                    }
+                                } else {
+                                    echo "No results found.";
+                                }
+                                ++$i;
                             }
-                        }else {
+                        } else {
                             echo "No results found.";
                         }
                         ?>
-              <input class="btn btn-default" type="submit" value="Start Assessment">
+
+                        <input type="text" name="studentEmail" placeholder="Email" required><span class="required"> *</span><br>
+                        <input type="text" name="studentFName" placeholder="First Name" required><span class="required"> *</span><br>
+                        <input type="text" name="studentLName" placeholder="Last name" required><span class="required"> *</span><br>
+                        <input type="text" name="studentId" placeholder="Student ID"><br>
+
+                        <?php
+                        echo "<input type='hidden' name='selectedQuizID' value='" . $selectedQuizId . "'>";
+                        echo "<input type='hidden' name='numOfQuestions' value='" . $i . "'>";
+                        ?>
+
+                        <input class="btn btn-default" name="submit" type="submit" value="Submit">
                     </form>
+                    
+                </div>
             </div>
-          </div>
         </div>
-      </body>
+        </div>
+    </body>
 </html>

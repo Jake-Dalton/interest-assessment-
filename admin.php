@@ -26,6 +26,10 @@
 			jQuery(function($) {
 				$(document).ready(function() {
 					$("table").DataTable();
+
+					$(".view-quiz").click(function() {
+						window.location.href = "./quizView.php?qid="+$(this).data("qid");
+					});
 				});
 			});
 		</script>
@@ -96,7 +100,7 @@
                                 <td>".$row['submitTime']."</td>
                                 <td>".$row['studentScore']."</td>
                                 <td>
-                                    <button type='button' class='btn btn-default'>View</button>
+                                    <button type='button' class='btn btn-default view-quiz' data-qid='".$row['responseID']."'>View</button>
                                     <button type='button' class='btn btn-default'>Delete</button>
                                 </td>
                              </tr>";
