@@ -136,8 +136,7 @@
                             </ul>
                             <div class="text-right">
                                 <button type="button" class="btn btn-default">
-                                    <a href='mailto:
-                                             <?php
+                                    <a href='mailto:<?php
                                              $sql = "SELECT instructorEmail
                                             FROM instructors JOIN quizzes 
                                             WHERE quizzes.instructorID = instructors.instructorID AND quizzes.quizID =" . $selectedQuizID;
