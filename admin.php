@@ -25,7 +25,9 @@
 			
 			jQuery(function($) {
 				$(document).ready(function() {
-					$("table").DataTable();
+					$("table").DataTable( {
+                        "order": [[ 4, "desc" ]]
+                    });
 
 					$(".view-quiz").click(function() {
 						window.location.href = "./quizView.php?qid="+$(this).data("qid");
@@ -54,7 +56,6 @@
             }
         } else {
             echo "no results found";
-            echo "<br> ".$emailSubmitted;
         }
         ?>
 
@@ -70,7 +71,7 @@
         </div>
 
         <div id="quizResults">
-            <h4>Quiz Results</h4>
+            <h4>Latest Quiz Results</h4>
             <table class="table table-hover table-striped table-bordered">
                 <thead>
                     <tr>
@@ -115,7 +116,7 @@
 
         <div class="row" id="yourQuiz">
             <div class="col-lg-12">
-                <h4><?php echo $quizName ?></h4>
+                <h4><?php echo "Current " . $quizName . " Assessment" ?></h4>
                 <div class="panel panel-default">
                     <div class="panel-body">
                         <?php
@@ -133,18 +134,17 @@
                             $result2 = mysqli_query($conn, $sql2);
                             echo "<h4>Question " . $i . "</h4>
                                           <p>" . $row[questionContent] . "</p>";
+                            echo "<ul>";
                             if (mysqli_num_rows($result2) > 0) {
                                 while($row = mysqli_fetch_assoc($result2)) {
-                                    echo "<input type='radio' 
-                                                            name='answer" . $i . "' 
-                                                            value='" . $row[answerID] . "'
-                                                            >" . 
+                                    echo "<li>" . 
                                         $row[answerContent] . 
-                                        "<br>";
+                                        "</li>";
                                 }
                             } else {
                                 echo "No results found.";
                             }
+                            echo "</ul>";
                             ++$i;
                         }
                     } else {
