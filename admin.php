@@ -64,7 +64,7 @@
                 <h3>Admin Panel</h3>
                 <div class="row text-right">
                     <div class="col-lg-12">
-                        <p><?php echo $instructorName; ?></p><span><a href="login.php"><button type="button" class="btn btn-default">Log Out</button></a></span></p>
+                        <p><?php echo $instructorName; ?></p><span><a href="quizEdit.php"><button type="button" class="btn btn-default">Edit Quiz</button></a> <a href="login.php"><button type="button" class="btn btn-default">Log Out</button></a></span></p>
                 </div>
             </div>
         </div>
@@ -153,7 +153,7 @@
                         ?>
                     </div>
                 </div>
-                <a href="quizEdit.php"><button type="button" class="btn btn-default">Edit Quiz</button></a>
+                
             </div>
         </div><!--Your Quiz Row -->
         </div> <!-- container -->
