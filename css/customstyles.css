@@ -113,7 +113,12 @@ margin-top: 2%;
     text-align: right;
     margin: 10px;
 }
-    
+
+/* results.php only*/
+.panel-results {
+height: 200px;
+}
+
 /*
 .panel-body input {
 	
