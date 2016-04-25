@@ -77,7 +77,7 @@
             <div class="row">
                 <div class="col-lg-6">
                     <div class="panel panel-default">
-                        <div class="panel-body">
+                        <div class="panel-body panel-results">
                             <?php
                             echo "<h4>Test results for " . $fName . " " . $lName . "</h4>";
                             ?>
@@ -113,7 +113,7 @@
                 </div>
                 <div class="col-lg-6">
                     <div class="panel panel-default">
-                        <div class="panel-body">
+                        <div class="panel-body panel-results">
                             <h4>Instructor Info:</h4>
                             <ul>
                                 <?php
