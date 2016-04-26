@@ -186,13 +186,20 @@
         $studentEmail = htmlspecialchars($_POST['studentEmail']);
         $studentFName = htmlspecialchars($_POST['studentFName']);
         $studentLName = htmlspecialchars($_POST['studentLName']);
-        $studentID    = intval($_POST['studentID']);   
+        $studentID    = intval($_POST['studentID']); 
+		
+		// For student results insertion into database
+		// references each question and answers index
+		// by creating an abitrary string formatted as 'Q:A, Q:A, ... '  
+		$numQs = intval($_POST['numOfQuestions']);
 		$answerList = "";
-		for($i = 1; $i < intval($_POST['numOfQuestions']); $i++) {
-			$answerList .= $_POST['questionID-'.$i] . ":" . $_POST['answer'.$i] . ",";
+		for($i = 1; $i < $numQs; $i++) {
+			$answerList .= $_POST['questionID-'.$i] . ":" . $_POST['answer'.$i] . ( $numQs-1 === $i ? "" : "," ); // if questions is at the end append nothing
 		}
+		// end davids edits
+
         $mysqltime = date("Y-m-d H:i:s");
-		echo $answerList;
+		
         $sql = "INSERT INTO responses 
                 (responseID, quizID, studentEmail, studentFirst, studentLast, studentCwiID, studentScore, submitTime, answerSet)
                 VALUES

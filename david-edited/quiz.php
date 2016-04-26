@@ -109,14 +109,7 @@
 
                         <input class="btn btn-default" name="submit" type="submit" value="Submit">
                     </form>
-                    <script>
-			
-						jQuery(function($) {
-							$(document).ready(function() {
-								//$("input[type='radio']").change();
-							});
-						});
-					</script>
+                    
                 </div>
             </div>
         </div>

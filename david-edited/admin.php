@@ -27,6 +27,7 @@
 				$(document).ready(function() {
 					$("table").DataTable();
 
+					// on click view quiz by passing id
 					$(".view-quiz").click(function() {
 						window.location.href = "./quizView.php?qid="+$(this).data("qid");
 					});
@@ -92,6 +93,7 @@
                     $result = mysqli_query($conn, $sql);
                     if (mysqli_num_rows($result) > 0) {
                         while($row = mysqli_fetch_assoc($result)) {
+							// added a data attribute to the view button to pass to the quizView.php page
                             echo "<tr> 
                                 <td>".$row['studentFirst']."</td>
                                 <td>".$row['studentLast']."</td>
