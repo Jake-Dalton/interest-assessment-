@@ -98,13 +98,13 @@ margin-top: 2%;
 box-shadow: 0 0 10px grey;
 }
 .panel-body h3 {
-    padding: 20px 10px 10px 25%;
+    padding: 20px 10px 10px 5px;
     clear: both;
 }
 
 .panel-body h4{
 	
-	padding: 20px 10px 10px 25%;
+	padding: 20px 10px 10px 5px;
 	clear: both;
 }
 
