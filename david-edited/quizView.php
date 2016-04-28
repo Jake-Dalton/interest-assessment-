@@ -1,3 +1,9 @@
+<?php 
+	// put on any page that needs to be protected
+	session_start(); 
+	if(!isset($_SESSION["user"])) header("location: login.php"); 
+?>
+
 <!DOCTYPE html>
 <html>
     <head>
@@ -22,7 +28,7 @@
 		<!-- DataTable plugin -->
 		<script src="https://cdn.datatables.net/1.10.11/js/jquery.dataTables.min.js"></script>
 		<script>
-			// makes the table element a default DataTable (see website for more options)
+			
 			jQuery(function($) {
 				$(document).ready(function() {
 					$("table").DataTable();
@@ -42,7 +48,11 @@
                 <h3>Admin Panel</h3>
                 <div class="row text-right">
                     <div class="col-lg-12">
-                        <p><?php echo $instructorName; ?></p><span><a href="login.php"><button type="button" class="btn btn-default">Log Out</button></a></span></p>
+                        <p><?php echo $instructorName; ?></p>
+						<p>
+							<a href="admin.php"><button type="button" class="btn btn-default">Go Back</button></a>
+							<span><a href="login.php?logout=1"><button type="button" class="btn btn-default">Log Out</button></a></span>
+						</p>
                 </div>
             </div>
         </div>
@@ -120,6 +130,16 @@
                 </tbody>
             </table>
         </div> <!-- quizResults -->
+
+        <div class="row" id="yourQuiz">
+            <div class="col-lg-12">
+                <h4><?php echo $quizName ?></h4>
+                <div class="panel panel-default">
+                    <div class="panel-body">
+                       
+
+            </div>
+        </div><!--Your Quiz Row -->
         </div> <!-- container -->
 		
     </body>

@@ -1,3 +1,8 @@
+<?php 
+	// put on any page that needs to be protected
+	session_start(); 
+	if(!isset($_SESSION["user"])) header("location: login.php"); 
+?>
 <!DOCTYPE html>
 <html>
     <head>
@@ -25,9 +30,10 @@
 			
 			jQuery(function($) {
 				$(document).ready(function() {
-					$("table").DataTable();
+					$("table").DataTable( {
+                        "order": [[ 4, "desc" ]]
+                    });
 
-					// on click view quiz by passing id
 					$(".view-quiz").click(function() {
 						window.location.href = "./quizView.php?qid="+$(this).data("qid");
 					});
@@ -41,7 +47,7 @@
 		
         <?php 
         // this is to display the instructor info and their quiz
-        $emailSubmitted = htmlspecialchars($_POST['instructorEmail']);
+        $emailSubmitted = htmlspecialchars($_SESSION["user"]);
 
         $sql = "SELECT instructors.instructorID, instructors.instructorEmail, quizzes.quizID, quizzes.quizName, instructors.instructorFirst, instructors.instructorLast 
                 FROM instructors JOIN quizzes 
@@ -55,7 +61,6 @@
             }
         } else {
             echo "no results found";
-            echo "<br> ".$emailSubmitted;
         }
         ?>
 
@@ -65,13 +70,13 @@
                 <h3>Admin Panel</h3>
                 <div class="row text-right">
                     <div class="col-lg-12">
-                        <p><?php echo $instructorName; ?></p><span><a href="login.php"><button type="button" class="btn btn-default">Log Out</button></a></span></p>
+                        <p><?php echo $instructorName; ?></p><span><a href="quizEdit.php"><button type="button" class="btn btn-default">Edit Quiz</button></a> <a href="login.php?logout=1"><button type="button" class="btn btn-default">Log Out</button></a></span></p>
                 </div>
             </div>
         </div>
 
         <div id="quizResults">
-            <h4>Quiz Results</h4>
+            <h4>Latest Quiz Results</h4>
             <table class="table table-hover table-striped table-bordered">
                 <thead>
                     <tr>
@@ -93,7 +98,6 @@
                     $result = mysqli_query($conn, $sql);
                     if (mysqli_num_rows($result) > 0) {
                         while($row = mysqli_fetch_assoc($result)) {
-							// added a data attribute to the view button to pass to the quizView.php page
                             echo "<tr> 
                                 <td>".$row['studentFirst']."</td>
                                 <td>".$row['studentLast']."</td>
@@ -117,7 +121,7 @@
 
         <div class="row" id="yourQuiz">
             <div class="col-lg-12">
-                <h4><?php echo $quizName ?></h4>
+                <h4><?php echo "Current " . $quizName . " Assessment" ?></h4>
                 <div class="panel panel-default">
                     <div class="panel-body">
                         <?php
@@ -135,18 +139,17 @@
                             $result2 = mysqli_query($conn, $sql2);
                             echo "<h4>Question " . $i . "</h4>
                                           <p>" . $row[questionContent] . "</p>";
+                            echo "<ul>";
                             if (mysqli_num_rows($result2) > 0) {
                                 while($row = mysqli_fetch_assoc($result2)) {
-                                    echo "<input type='radio' 
-                                                            name='answer" . $i . "' 
-                                                            value='" . $row[answerID] . "'
-                                                            >" . 
+                                    echo "<li>" . 
                                         $row[answerContent] . 
-                                        "<br>";
+                                        "</li>";
                                 }
                             } else {
                                 echo "No results found.";
                             }
+                            echo "</ul>";
                             ++$i;
                         }
                     } else {
@@ -155,7 +158,7 @@
                         ?>
                     </div>
                 </div>
-                <a href="quizEdit.php"><button type="button" class="btn btn-default">Edit Quiz</button></a>
+                
             </div>
         </div><!--Your Quiz Row -->
         </div> <!-- container -->
