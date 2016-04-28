@@ -1,3 +1,9 @@
+<?php 
+	// put on any page that needs to be protected
+	session_start(); 
+	if(!isset($_SESSION["user"])) header("location: login.php"); 
+?>
+
 <!doctype html>
 <html lang="en">
     <head>
@@ -25,7 +31,7 @@
                 <h3>Edit your quiz</h3>
                 <div class="row text-right">
                     <div class="col-lg-12">
-                        <p>Admin Name Here</p><span><a href="login.php"><button type="button" class="btn btn-default">Log Out</button></a></span></p>
+                        <p>Admin Name Here</p><span><a href="login.php?logout=1"><button type="button" class="btn btn-default">Log Out</button></a></span></p>
                 </div>
             </div>    
         </div>

@@ -19,7 +19,6 @@
             echo "No results found.";
         }
 
-
         ?>
 
         <!-- Latest compiled and minified CSS -->
@@ -75,6 +74,8 @@
                                 $result2 = mysqli_query($conn, $sql2);
                                 echo "<h4>Question " . $i . "</h4>
                                           <p>" . $row[questionContent] . "</p>";
+                                // keep track of the questions id
+                                echo "<input type='hidden' name='questionID-$i' value='{$row[questionID]}'>";
                                 if (mysqli_num_rows($result2) > 0) {
                                     while($row = mysqli_fetch_assoc($result2)) {
                                         echo "<input type='radio' 
@@ -92,26 +93,26 @@
                         } else {
                             echo "No results found.";
                         }
-						
+
                         ?>
-						<hr>
-						<h3>Student Information</h3>
-                        <input type="text" name="studentEmail" placeholder="Email" required><span class="required"> *</span><br><br>
-                        <input type="text" name="studentFName" placeholder="First Name" required><span class="required"> *</span><br><br>
-                        <input type="text" name="studentLName" placeholder="Last name" required><span class="required"> *</span><br><br>
-                        <input type="text" name="studentId" placeholder="Student ID"><br>
+                        <hr>
+                        <h3>Student Information</h3>
+                        <input class="studentInfo" type="text" name="studentEmail" placeholder="Email" required><span class="required">*</span><br><br>
+                        <input class="studentInfo" type="text" name="studentFName" placeholder="First Name" required><span class="required">*</span><br><br>
+                        <input class="studentInfo" type="text" name="studentLName" placeholder="Last name" required><span class="required">*</span><br><br>
+                        <input class="studentInfo" type="text" name="studentId" placeholder="Student ID">
 
                         <?php
                         echo "<input type='hidden' name='selectedQuizID' value='" . $selectedQuizId . "'>";
                         echo "<input type='hidden' name='numOfQuestions' value='" . $i . "'>";
                         ?>
-						</br>
-                        <input class="btn btn-default" name="submit" type="submit" value="Submit">
+                        </br>
+                    <input class="btn btn-default" name="submit" type="submit" value="Submit">
                     </form>
-                    
-                </div>
+
             </div>
         </div>
         </div>
-    </body>
+    </div>
+</body>
 </html>

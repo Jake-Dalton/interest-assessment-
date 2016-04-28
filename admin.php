@@ -1,3 +1,8 @@
+<?php 
+	// put on any page that needs to be protected
+	session_start(); 
+	if(!isset($_SESSION["user"])) header("location: login.php"); 
+?>
 <!DOCTYPE html>
 <html>
     <head>
@@ -42,7 +47,7 @@
 		
         <?php 
         // this is to display the instructor info and their quiz
-        $emailSubmitted = htmlspecialchars($_POST['instructorEmail']);
+        $emailSubmitted = htmlspecialchars($_SESSION["user"]);
 
         $sql = "SELECT instructors.instructorID, instructors.instructorEmail, quizzes.quizID, quizzes.quizName, instructors.instructorFirst, instructors.instructorLast 
                 FROM instructors JOIN quizzes 
@@ -65,7 +70,7 @@
                 <h3>Admin Panel</h3>
                 <div class="row text-right">
                     <div class="col-lg-12">
-                        <p><?php echo $instructorName; ?></p><span><a href="quizEdit.php"><button type="button" class="btn btn-default">Edit Quiz</button></a> <a href="login.php"><button type="button" class="btn btn-default">Log Out</button></a></span></p>
+                        <p><?php echo $instructorName; ?></p><span><a href="quizEdit.php"><button type="button" class="btn btn-default">Edit Quiz</button></a> <a href="login.php?logout=1"><button type="button" class="btn btn-default">Log Out</button></a></span></p>
                 </div>
             </div>
         </div>

@@ -22,13 +22,6 @@
             <div class="jumbotron">
                 <img id="logo" src="images/Logo.png" />
                 <p>Results</p>
-                <span>
-                    <a href="login.php">
-                        <button type='button' class='btn btn-default resultsHomeButton'>
-                            <a href="index.html">Home</a>
-                        </button>
-                    </a>
-                </span>
             </div>
 
             <?php
@@ -79,7 +72,7 @@
                     <div class="panel panel-default">
                         <div class="panel-body panel-results">
                             <?php
-                            echo "<h4>Test results for " . $fName . " " . $lName . "</h4>";
+                            echo "<h4>Test results for " . $fName . " " . $lName . ":</h4>";
                             ?>
                             <ul>
                                 <?php
@@ -98,10 +91,10 @@
                                 }
                                 ?>
                                 <?php echo "<li>Your score was: " . $percentCorrect . "%</li>"; ?>
-                                <?php echo "<li>Placeholder Bullet for Box formatting</li>"; ?>
+                                <?php echo "<li>Placeholder bullet for more information.</li>"; ?>
                             </ul>
                             <div class="text-right">
-                                <button onclick="printThis()" type="button" class="btn btn-default">Print Now</button>
+                                <button onclick="printThis()" type="button" class="btn btn-default">Print Results</button>
                                 <script>
                                     function printThis() {
                                         window.print();
@@ -125,8 +118,9 @@
 
                                 if (mysqli_num_rows($result) > 0) {
                                     while($row = mysqli_fetch_assoc($result)) {
+                                        $phone = $row[instructorPhone];
                                         echo "<li><b>Name:</b> " . $row[instructorFirst] . " " .  $row[instructorLast] . "</li>";
-                                        echo "<li><b>Phone:</b> " . $row[instructorPhone] . "</li>"; // Formatting of phone number?
+                                        echo "<li><b>Phone:</b> " . $phone . "</li>"; 
                                         echo "<li><b>Email:</b> " . $row[instructorEmail] . "</li>";
                                     }
                                 } else {
@@ -149,7 +143,7 @@
                                              } else {
                                                  echo "No results found.";
                                              }
-                                             ?>?Subject=Test%20Results'>Email Now
+                                             ?>?Subject=Test%20Results'>Email
                                     </a>
                                 </button>
                             </div>
@@ -157,7 +151,7 @@
                     </div>
                 </div>
             </div>
-            <div class="col-lg-13">
+            <div id="moreInfo" class="col-lg-13">
                 <div class="panel panel-default">
                     <div class="panel-body">
                         <h4>For more information Visit: </h4>
@@ -170,35 +164,40 @@
                             $result = mysqli_query($conn, $sql);
                             if (mysqli_num_rows($result) > 0) {
                                 while ($row = mysqli_fetch_assoc($result)) {
-                                    echo "<li> <a href='" . $row[deptURL] . "'>CWI " . $row[quizName] . " Department Page </a></li>";
+                                    echo "<li> <a href='" . $row[deptURL] . "' target='_blank'>CWI " . $row[quizName] . " Department Page </a></li>";
                                 }
                             }
                             else {echo "No Results Found";}
                             ?>
 
-                            <li>placeholder</li>
-                            <li>placeholder</li>
+                            <li>Placeholder for link.</li>
+                            <li>Placeholder for link.</li>
                         </ul>
                     </div>
                 </div>
             </div>
         </div>
         <!-- closes container -->
-
         <!-- Insert information into the database -->
         <?php
-
         $quizID = intval($_POST['selectedQuizID']);
         $studentEmail = htmlspecialchars($_POST['studentEmail']);
         $studentFName = htmlspecialchars($_POST['studentFName']);
         $studentLName = htmlspecialchars($_POST['studentLName']);
-        $studentID    = intval($_POST['studentID']);        
-        $mysqltime = date("Y-m-d H:i:s");
-        $answerList = "";
-		for($i = 1; $i < intval($_POST['numOfQuestions']); $i++) {
-			$answerList .= $_POST['questionID-'.$i] . ":" . $_POST['answer'.$i] . ",";
-		}
+        $studentID    = intval($_POST['studentID']); 
 
+        // For student results insertion into database
+        // references each question and answers index
+        // by creating an abitrarily formatted string as 'Q:A, Q:A, ... '  
+        $numQs = intval($_POST['numOfQuestions']);
+        $answerList = "";
+        for($i = 1; $i < $numQs; $i++) {
+            $answerList .= $_POST['questionID-'.$i] . ":" . $_POST['answer'.$i] . ( $numQs-1 === $i ? "" : "," ); // if questions is at the end append nothing
+        }		
+
+        $mysqltime = date("Y-m-d H:i:s");
+
+        // added answerSet column and answer list
         $sql = "INSERT INTO responses 
                 (responseID, quizID, studentEmail, studentFirst, studentLast, studentCwiID, studentScore, submitTime, answerSet)
                 VALUES

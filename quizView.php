@@ -1,3 +1,9 @@
+<?php 
+	// put on any page that needs to be protected
+	session_start(); 
+	if(!isset($_SESSION["user"])) header("location: login.php"); 
+?>
+
 <!DOCTYPE html>
 <html>
     <head>
@@ -42,7 +48,11 @@
                 <h3>Admin Panel</h3>
                 <div class="row text-right">
                     <div class="col-lg-12">
-                        <p><?php echo $instructorName; ?></p><span><a href="login.php"><button type="button" class="btn btn-default">Log Out</button></a></span></p>
+                        <p><?php echo $instructorName; ?></p>
+						<p>
+							<a href="admin.php"><button type="button" class="btn btn-default">Go Back</button></a>
+							<span><a href="login.php?logout=1"><button type="button" class="btn btn-default">Log Out</button></a></span>
+						</p>
                 </div>
             </div>
         </div>
@@ -62,34 +72,9 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <?php
+                   <?php
 					
-                    $sql = "SELECT * 
-                        FROM responses 
-                        WHERE responseID = " . $_GET['qid'] ."
-                        ORDER BY submitTime DESC LIMIT 1";
-                    $result = mysqli_query($conn, $sql);
-                    if (mysqli_num_rows($result) > 0) {
-                        while($row = mysqli_fetch_assoc($result)) {
-                            echo "<tr> 
-                                <td>".$row['studentFirst']."</td>
-                                <td>".$row['studentLast']."</td>
-                                <td>".$row['studentEmail']."</td>
-                                <td>".$row['studentCwiID']."</td>
-                                <td>".$row['submitTime']."</td>
-                                <td>".$row['studentScore']."</td>
-                                <td>
-                                    <button type='button' class='btn btn-default'>View</button>
-                                    <button type='button' class='btn btn-default'>Delete</button>
-                                </td>
-                             </tr>";
-                        }
-                    } else {
-                        echo "no results found";
-                    }
-                    ?>
-					<?php
-					
+					// select the quiz by ID passed from admin.php
                     $sql = "SELECT * 
                         FROM responses 
                         WHERE responseID = " . $_GET['qid'] ."
@@ -99,7 +84,7 @@
                     if (mysqli_num_rows($result) > 0) {
                         while($row = mysqli_fetch_assoc($result)) {
 							
-
+							// display student info
                             echo "<tr> 
                                 <td>".$row['studentFirst']."</td>
                                 <td>".$row['studentLast']."</td>
@@ -107,32 +92,34 @@
                                 <td>".$row['studentCwiID']."</td>
                                 <td>".$row['submitTime']."</td>
                                 <td>".$row['studentScore']."</td>
-                                <td>
-                                    <button type='button' class='btn btn-default'>View</button>
-                                    <button type='button' class='btn btn-default'>Delete</button>
-                                </td>
+                                
                              </tr>";
+
+							 // convert answerSet into string that was pulled from the database
 							 $answers = explode(",",$row['answerSet']);
 							 foreach($answers as $a) {
-								$a = explode(":", $a);
-								echo "question id = {$a[0]}<br>answer id = {$a[1]}<br>";
-								$sql = "SELECT * 
-									FROM questions 
-									WHERE questionID = ".intval($a[0])."
-									LIMIT 1";
-								$question = mysqli_query($conn, $sql);
+								$a = explode(":", $a); // split question and answer into sub array
 								
-								$sql = "SELECT * 
-									FROM answers 
-									WHERE answerID = {$a[1]}
-									LIMIT 1";
-								$answer = mysqli_query($conn, $sql);
-								//var_dump($answer);
-								/*echo "<tr>
-										<td>{$question['questionContent']}</td>
-										<td>{$answer['answerContent']}</td>
+								// fetch question content from db
+								$sql = "SELECT questionContent FROM iaa.questions WHERE questionID = {$a[0]}";
+								$question = mysqli_fetch_object( mysqli_query($conn, $sql) );
+								
+								// fetch answer contrent from db
+								$sql = "SELECT * FROM iaa.answers WHERE answerID = {$a[1]}";
+								$answer = mysqli_fetch_object( mysqli_query($conn, $sql) );
+								$isCorrect = $answer->isCorrect;
+
+								// display question/answer pair
+								echo "<tr>
+										<td><strong>Question:</strong></td>
+										<td>{$question->questionContent}</td>
+										<td><strong>Answer</strong></td>
+										<td>{$answer->answerContent}</td>
+										<td></td>
+										<td><span class='glyphicon glyphicon-".($isCorrect ? "ok" : "remove")."' aria-hidden='true'></span></td>
+										<td></td>
 									</tr>
-									 ";*/
+									 ";
 								
 							 }
                         }
@@ -149,42 +136,8 @@
                 <h4><?php echo $quizName ?></h4>
                 <div class="panel panel-default">
                     <div class="panel-body">
-                        <?php
-    $i = 1;
-                    $sql = "SELECT questionContent, questionID
-                                    FROM questions
-                                    WHERE quizID = " . $quizID;
-                    $result = mysqli_query($conn, $sql);
+                       
 
-                    if (mysqli_num_rows($result) > 0) {
-                        while($row = mysqli_fetch_assoc($result)) {
-                            $sql2 = "SELECT answerContent, answerID
-                                     FROM answers
-                                     WHERE questionID = " . $row[questionID];
-                            $result2 = mysqli_query($conn, $sql2);
-                            echo "<h4>Question " . $i . "</h4>
-                                          <p>" . $row[questionContent] . "</p>";
-                            if (mysqli_num_rows($result2) > 0) {
-                                while($row = mysqli_fetch_assoc($result2)) {
-                                    echo "<input type='radio' 
-                                                            name='answer" . $i . "' 
-                                                            value='" . $row[answerID] . "'
-                                                            >" . 
-                                        $row[answerContent] . 
-                                        "<br>";
-                                }
-                            } else {
-                                echo "No results found.";
-                            }
-                            ++$i;
-                        }
-                    } else {
-                        echo "No results found.";
-                    }
-                        ?>
-                    </div>
-                </div>
-                <a href="quizEdit.php"><button type="button" class="btn btn-default">Edit Quiz</button></a>
             </div>
         </div><!--Your Quiz Row -->
         </div> <!-- container -->

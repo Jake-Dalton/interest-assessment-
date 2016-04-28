@@ -1,3 +1,9 @@
+<?php 
+	// put on any page that needs to be protected
+	session_start(); 
+	if(!isset($_SESSION["user"])) header("location: login.php"); 
+?>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -10,7 +16,7 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap-theme.min.css" integrity="sha384-fLW2N01lMqjakBkx3l/M9EahuwpSfeNvV63J5ezn3uZzapT0u7EYsXMjQV+0En5r" crossorigin="anonymous">
 
     <!--stylesheet-->
-    <link rel="stylesheet" type="text/css" href="css/addQuestions.css">
+    <link rel="stylesheet" type="text/css" href="css/customstyles.css">
 
     <!-- Latest compiled and minified JavaScript -->
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
@@ -27,7 +33,7 @@
             </div>
         </div>
 
-        <a href="superAdmin.php"><button type="button" class="btn btn-default">Go Back</button></a>
+        <a href="admin.php"><button type="button" class="btn btn-default">Go Back</button></a>
 
         <div class="row">
             <div class="col-lg-12">
