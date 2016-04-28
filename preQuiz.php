@@ -46,7 +46,7 @@
                             echo "No results found.";
                         }
                         ?>
-              <input class="btn btn-default" type="submit" value="Start Assessment">
+              <input id="startButton" class="btn btn-default" type="submit" value="Start Assessment">
                     </form>
             </div>
           </div>

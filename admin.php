@@ -17,7 +17,7 @@
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap-theme.min.css" integrity="sha384-fLW2N01lMqjakBkx3l/M9EahuwpSfeNvV63J5ezn3uZzapT0u7EYsXMjQV+0En5r" crossorigin="anonymous">
 
         <!-- admin css -->
-        <link rel="stylesheet" type="text/css" href="css/admin.css">
+        <link rel="stylesheet" type="text/css" href="css/customstyles.css">
 
         <!-- Latest compiled and minified JavaScript -->
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
@@ -70,13 +70,14 @@
                 <h3>Admin Panel</h3>
                 <div class="row text-right">
                     <div class="col-lg-12">
-                        <p><?php echo $instructorName; ?></p><span><a href="quizEdit.php"><button type="button" class="btn btn-default">Edit Quiz</button></a> <a href="login.php?logout=1"><button type="button" class="btn btn-default">Log Out</button></a></span></p>
+                        <p>Welcome, <?php echo $instructorName; ?></p>
+                        <span><a href="login.php?logout=1"><button type="button" class="btn btn-default">Log Out</button></a></span></p>
                 </div>
             </div>
         </div>
 
         <div id="quizResults">
-            <h4>Latest Quiz Results</h4>
+            <h4>Quiz Results</h4>
             <table class="table table-hover table-striped table-bordered">
                 <thead>
                     <tr>
@@ -107,7 +108,6 @@
                                 <td>".$row['studentScore']."</td>
                                 <td>
                                     <button type='button' class='btn btn-default view-quiz' data-qid='".$row['responseID']."'>View</button>
-                                    <button type='button' class='btn btn-default'>Delete</button>
                                 </td>
                              </tr>";
                         }
@@ -121,7 +121,7 @@
 
         <div class="row" id="yourQuiz">
             <div class="col-lg-12">
-                <h4><?php echo "Current " . $quizName . " Assessment" ?></h4>
+                <h4><?php echo "Current " . $quizName . " Assessment Questions and Answers" ?><span id="quizEditButton"><a href="quizEdit.php"><button type="button" class="btn btn-default">Edit Quiz</button></a></span></h4>                
                 <div class="panel panel-default">
                     <div class="panel-body">
                         <?php

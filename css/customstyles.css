@@ -6,12 +6,17 @@ Lt. Beige:		#ECEDD7
 Drk. Beige:		#D8D9AD
 *******************************/
 
+body {
+    text-shadow: -2px 2px 8px #DDD;
+}
+
 .btn.btn-default {
     color: black;
     font-weight: 600;
     background: #DF9D0F;
     text-shadow: none;
     border: 1px solid #EEB111;
+    box-shadow: 0 0 10px #DDD;
 }
 
 .btn.btn-default:hover {
@@ -62,10 +67,8 @@ width: 250px;
 }
 */
 
-/*preQuiz only*/
-input {
-    float: left;
-    margin-top: 2%;
+.quizEditInput {
+    width: 100%;
 }
 
 /*preQuiz*/
@@ -153,5 +156,17 @@ margin: 5px 5px 5px 0px;
 
 .studentInfo {
     display: block;
-    margin: auto;
+    float: left;
+}
+
+#startButton {
+    margin-top: 1%;
+}
+
+#quizEditButton {
+    margin-left: 2em;    
+}
+
+.quizUpdateButton {
+    margin-top: 1em;
 }

@@ -106,7 +106,8 @@
                         echo "<input type='hidden' name='selectedQuizID' value='" . $selectedQuizId . "'>";
                         echo "<input type='hidden' name='numOfQuestions' value='" . $i . "'>";
                         ?>
-                        </br>
+                        <br>
+                        <br>
                     <input class="btn btn-default" name="submit" type="submit" value="Submit">
                     </form>
 
